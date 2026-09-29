@@ -1,0 +1,11 @@
+# Ignore Python files so Vercel treats this repository as a static website
+*.py
+ai_engine/
+
+# Ignore .NET solution and desktop projects
+IPsecSecurityAnalyzer/
+IPsecSecurityAnalyzer.Tests/
+IPsecSecurityAnalyzer.sln
+
+# Ignore documentation & markdown files
+*.md
