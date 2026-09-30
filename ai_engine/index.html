@@ -228,6 +228,12 @@
             margin-top: 2px;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .header-badge {
             display: flex;
             align-items: center;
@@ -291,6 +297,8 @@
             align-items: flex-start;
             justify-content: space-between;
             margin-bottom: 22px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .section-header-title {
@@ -434,26 +442,27 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 36px 24px;
+            padding: 30px 24px;
             text-align: center;
             margin-bottom: 24px;
         }
 
         .hero-icon-circle {
-            width: 76px;
-            height: 76px;
+            width: 70px;
+            height: 70px;
             background: #1E293B;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px auto;
+            margin: 0 auto 14px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border-accent);
         }
 
         .hero-icon-circle svg {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             fill: var(--accent-cyan);
         }
 
@@ -465,39 +474,103 @@
         }
 
         .execution-desc {
-            font-size: 13.5px;
+            font-size: 13px;
             color: var(--text-secondary);
             max-width: 580px;
-            margin: 0 auto 22px auto;
+            margin: 0 auto 18px auto;
             line-height: 1.5;
         }
 
-        .file-details-card {
+        .scenario-selector-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .scenario-select {
             background: var(--bg-input);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-accent);
+            color: var(--text-primary);
+            padding: 8px 14px;
             border-radius: 6px;
-            padding: 14px 18px;
-            max-width: 560px;
-            margin: 0 auto 20px auto;
+            font-size: 12.5px;
+            font-family: 'JetBrains Mono', monospace;
+            max-width: 380px;
+        }
+
+        .file-details-card {
             display: none;
+            background: #0D1525;
+            border: 1px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 14px 18px;
+            max-width: 600px;
+            margin: 0 auto 18px auto;
             text-align: left;
-            font-size: 12px;
         }
 
         .file-details-row {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            font-size: 12.5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .file-details-row:last-child {
+            border-bottom: none;
         }
 
         .file-label {
             color: var(--text-muted);
+            font-weight: 500;
         }
 
         .file-val {
             color: var(--text-primary);
-            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
             word-break: break-all;
+        }
+
+        /* Dissection Progress Bar */
+        .progress-box {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto 18px auto;
+            background: #0E1626;
+            border: 1px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 14px 18px;
+            text-align: left;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-track {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 4px;
+            transition: width 0.2s ease;
         }
 
         .execution-buttons {
@@ -506,6 +579,7 @@
             justify-content: center;
             gap: 12px;
             margin-bottom: 16px;
+            flex-wrap: wrap;
         }
 
         .btn-secondary {
@@ -599,7 +673,7 @@
             background: #1E293B;
             border: 1px solid var(--border-accent);
             color: var(--text-secondary);
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 4px;
             font-size: 11.5px;
             font-weight: 500;
@@ -612,7 +686,7 @@
             border-color: var(--accent-cyan);
         }
 
-        /* Data Tables for other tabs */
+        /* Data Tables */
         .data-table-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -646,7 +720,8 @@
         }
 
         table.soc-table tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
+            cursor: pointer;
         }
 
         .badge-severity {
@@ -666,7 +741,6 @@
         .tag-passed { color: var(--accent-success); font-weight: 600; }
         .tag-failed { color: var(--accent-danger); font-weight: 600; }
 
-        /* Media queries */
         @media (max-width: 1024px) {
             .cards-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -759,6 +833,82 @@
             min-width: 40px;
             text-align: right;
         }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-card {
+            background: #101828;
+            border: 1px solid var(--border-accent);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 850px;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        /* Report Preview Document */
+        .report-doc-preview {
+            background: #0B111E;
+            border: 1px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 24px;
+            font-family: 'Inter', sans-serif;
+            color: #CBD5E1;
+            line-height: 1.6;
+        }
+
+        .report-title-banner {
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .report-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            background: #111B2E;
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -846,9 +996,15 @@
                 <h2 id="topHeaderTitle">Executive Dashboard</h2>
                 <p id="topHeaderSubtitle">Overview of active packet captures, security posture, and analysis status</p>
             </div>
-            <div class="header-badge" id="topPcapBadge" onclick="triggerPcapSimulation()">
-                <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
-                <span id="topPcapText">No PCAP Loaded</span>
+            <div class="header-actions">
+                <button class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="navigateTo('reports')">
+                    <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                    Generate Report
+                </button>
+                <div class="header-badge" id="topPcapBadge" onclick="navigateTo('pcap')">
+                    <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+                    <span id="topPcapText">No PCAP Loaded</span>
+                </div>
             </div>
         </header>
 
@@ -1029,7 +1185,18 @@
                         <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
                     </div>
                     <h2 class="execution-title">IPsec Packet Capture Engine</h2>
-                    <p class="execution-desc">Select a PCAP/PCAPNG file to perform deep protocol dissection, cryptographic audit, and security posture assessment.</p>
+                    <p class="execution-desc">Select a PCAP/PCAPNG capture file or choose a live testbed scenario to execute deep dissection, cryptographic compliance auditing, and AI anomaly detection.</p>
+
+                    <!-- Scenario Selector -->
+                    <div class="scenario-selector-row">
+                        <span style="font-size: 12.5px; color: var(--text-muted); font-weight: 500;">Select Sample Scenario:</span>
+                        <select id="scenarioSelect" class="scenario-select" onchange="loadSelectedScenario()">
+                            <option value="ikev2_enterprise">vpn_ikev2_enterprise.pcapng (Compliant AES-256-GCM)</option>
+                            <option value="legacy_3des">legacy_ikev1_3des_weak.pcap (High Risk 3DES/MD5)</option>
+                            <option value="ikev2_no_pfs">ikev2_weak_dh_no_pfs.pcap (Moderate Risk DH-5)</option>
+                            <option value="anomalous_tunnel">anomalous_tunnel_exfiltration.pcap (AI Anomaly Detected)</option>
+                        </select>
+                    </div>
 
                     <!-- File Details when selected -->
                     <div class="file-details-card" id="fileDetailsBox">
@@ -1047,7 +1214,18 @@
                         </div>
                         <div class="file-details-row">
                             <span class="file-label">Extension:</span>
-                            <span class="file-val" style="color: var(--accent-cyan);">.PCAPNG</span>
+                            <span class="file-val" style="color: var(--accent-cyan);" id="detailFileExt">.PCAPNG</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div class="progress-box" id="analysisProgressBox">
+                        <div class="progress-header">
+                            <span id="progressStatusText">Dissecting frames...</span>
+                            <span id="progressPctText">0%</span>
+                        </div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill" id="progressBarFill"></div>
                         </div>
                     </div>
 
@@ -1056,24 +1234,30 @@
                         <input type="file" id="pcapFileInput" style="display: none;" accept=".pcap,.pcapng" onchange="handleFileSelect(event)">
                         <button class="btn-secondary" onclick="document.getElementById('pcapFileInput').click()">
                             <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
-                            Select PCAP
+                            Upload Custom PCAP
                         </button>
                         <button class="btn-primary" id="btnAnalyzePcap" onclick="triggerPcapSimulation()">
                             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
                             <span id="btnAnalyzeText">Analyze PCAP</span>
                         </button>
-                        <button class="btn-secondary" onclick="navigateTo('pcap')">PCAP Details</button>
+                        <button class="btn-secondary" onclick="navigateTo('pcap')">
+                            PCAP Dissection View
+                        </button>
+                        <button class="btn-secondary" onclick="navigateTo('reports')">
+                            Compliance Reports
+                        </button>
                     </div>
 
                     <!-- Quick Navigation Action Bar after Analysis -->
                     <div class="post-analysis-bar" id="postAnalysisBar">
                         <p>Analysis Complete — Explore Detailed Findings:</p>
                         <div class="post-nav-pills">
-                            <button class="pill-btn" onclick="navigateTo('ipsec')">IPsec Dissection</button>
+                            <button class="pill-btn" onclick="navigateTo('pcap')">PCAP Dissection</button>
+                            <button class="pill-btn" onclick="navigateTo('ipsec')">IPsec Cryptography</button>
                             <button class="pill-btn" onclick="navigateTo('assessment')">Security Assessment</button>
                             <button class="pill-btn" onclick="navigateTo('findings')">Vulnerability Findings</button>
                             <button class="pill-btn" onclick="navigateTo('ai')">AI Intelligence</button>
-                            <button class="pill-btn" onclick="navigateTo('reports')">Audit Reports</button>
+                            <button class="pill-btn" onclick="navigateTo('reports')">Generate Reports</button>
                         </div>
                     </div>
 
@@ -1087,11 +1271,35 @@
             <section class="view-panel" id="view-pcap">
                 <div class="section-header-row">
                     <div>
-                        <h2 class="section-header-title">PCAP Analysis</h2>
+                        <h2 class="section-header-title">PCAP Packet Stream Dissection</h2>
                         <p class="section-header-subtitle">Inspect, decode, and extract real packet information, protocol distributions, and IPsec indicators from raw PCAP/PCAPNG captures.</p>
                     </div>
-                    <button class="btn-primary" onclick="triggerPcapSimulation()">Simulate Dissection</button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-secondary" onclick="exportPcapCsv()" style="font-size: 12px; padding: 7px 14px;">
+                            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                            Export CSV
+                        </button>
+                        <button class="btn-primary" onclick="triggerPcapSimulation()">
+                            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#fff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+                            Re-Analyze PCAP
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Filter and Search Bar -->
+                <div class="soc-card" style="margin-bottom: 14px; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <span style="font-size: 12px; color: var(--text-muted); margin-right: 6px;">Protocol Filter:</span>
+                        <button class="duration-preset active" onclick="filterPackets('ALL', this)">ALL</button>
+                        <button class="duration-preset" onclick="filterPackets('IKE', this)">IKE / ISAKMP</button>
+                        <button class="duration-preset" onclick="filterPackets('ESP', this)">ESP Encrypted</button>
+                        <button class="duration-preset" onclick="filterPackets('UDP', this)">UDP / TCP</button>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input type="text" id="packetSearchInput" placeholder="Filter by IP, SPI, or keyword..." onkeyup="searchPackets()" style="background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 6px 12px; border-radius: 6px; font-size: 12px; width: 240px; font-family: 'JetBrains Mono', monospace;">
+                    </div>
+                </div>
+
                 <div class="data-table-container">
                     <table class="soc-table">
                         <thead>
@@ -1102,21 +1310,18 @@
                                 <th>Destination IP</th>
                                 <th>Protocol</th>
                                 <th>Length</th>
+                                <th>SPI / Hash</th>
                                 <th>Dissected Info</th>
                             </tr>
                         </thead>
                         <tbody id="pcapPacketRows">
-                            <tr><td>1</td><td>0.000000</td><td>192.168.1.105</td><td>198.51.100.1</td><td>ISAKMP / IKEv2</td><td>448</td><td>IKE_SA_INIT Request: SPIi=a93b482fce01, Prop: AES-256-GCM, DH Group 14</td></tr>
-                            <tr><td>2</td><td>0.042180</td><td>198.51.100.1</td><td>192.168.1.105</td><td>ISAKMP / IKEv2</td><td>464</td><td>IKE_SA_INIT Response: SPIr=582c091931de, Selected: AES-256-GCM, DH 14</td></tr>
-                            <tr><td>3</td><td>0.089201</td><td>192.168.1.105</td><td>198.51.100.1</td><td>IKEv2</td><td>320</td><td>IKE_AUTH Request: Encrypted Payload (SK), Child SA Proposal</td></tr>
-                            <tr><td>4</td><td>0.125430</td><td>198.51.100.1</td><td>192.168.1.105</td><td>IKEv2</td><td>304</td><td>IKE_AUTH Response: Child SA Established, ESP SPI=0x4a88f190</td></tr>
-                            <tr><td>5</td><td>0.140220</td><td>192.168.1.105</td><td>198.51.100.1</td><td>ESP</td><td>1420</td><td>ESP Seq=1, SPI=0x4a88f190, IV=16B, Auth-Tag=16B (AES-GCM)</td></tr>
+                            <!-- Populated dynamically based on analysis -->
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- VIEW 3: LIVE CAPTURE (Matches Desktop WPF Screenshot) -->
+            <!-- VIEW 3: LIVE CAPTURE -->
             <section class="view-panel" id="view-live">
                 <div class="section-header-row">
                     <div>
@@ -1132,7 +1337,7 @@
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap;">
                         <label style="font-size: 13px; color: var(--text-secondary); min-width: 170px;">Network Interface / Stream:</label>
                         <select id="liveInterfaceSelect" style="flex: 1; min-width: 300px; background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 8px 12px; border-radius: 6px; font-size: 12.5px; font-family: 'JetBrains Mono', monospace;">
-                            <option>[Testbed Stream] strongSwan IPsec (IKEv2 + AES-256-GCM + DH-19)</option>
+                            <option>[Testbed Stream] strongSwan IPsec (IKEv2 + AES-256-GCM + DH-14)</option>
                             <option>Ethernet (Intel I219-LM) — 192.168.1.105</option>
                             <option>Wi-Fi (Intel AX211) — 192.168.1.112</option>
                             <option>Loopback (lo0) — 127.0.0.1</option>
@@ -1154,23 +1359,15 @@
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button class="btn-primary" id="btnStartCapture" onclick="startLiveCapture()" style="font-size: 12.5px; padding: 8px 18px;">
                             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M8 5v14l11-7z"/></svg>
-                            Start Capture
+                            Start Live Stream
                         </button>
                         <button class="btn-secondary" id="btnStopCapture" onclick="stopLiveCapture()" style="font-size: 12.5px; padding: 8px 18px; color: var(--accent-danger); border-color: rgba(239,68,68,0.4);">
                             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--accent-danger);"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-                            Stop Capture
+                            Stop Stream
                         </button>
                         <button class="btn-secondary" onclick="analyzeCapturedStream()" style="font-size: 12.5px; padding: 8px 18px;">
                             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--accent-cyan);"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
-                            Analyze Captured Stream
-                        </button>
-                        <button class="btn-secondary" onclick="alert('Exporting captured stream to PCAP file...')" style="font-size: 12.5px; padding: 8px 18px;">
-                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                            Export PCAP
-                        </button>
-                        <button class="btn-secondary" onclick="refreshLiveInterfaces()" style="font-size: 12.5px; padding: 8px 18px;">
-                            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
-                            Refresh
+                            Analyze Captured Packets
                         </button>
                     </div>
                 </div>
@@ -1195,7 +1392,6 @@
                     <div class="soc-card">
                         <div class="card-top"><span class="card-label">Capture Engine Telemetry</span></div>
                         <div class="card-value" style="font-size: 13px; color: var(--accent-success);" id="liveEngineStatus">Engine ready. Select an interface or virtual testbed stream to begin.</div>
-                        <div class="card-subtext" id="liveEngineSub"></div>
                     </div>
                 </div>
 
@@ -1220,14 +1416,14 @@
                                 </tr>
                             </thead>
                             <tbody id="livePacketTableBody">
-                                <!-- Populated by live capture simulation -->
+                                <!-- Populated dynamically -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
 
-            <!-- VIEW 4: IPSEC ANALYSIS (Matches Desktop WPF Screenshot) -->
+            <!-- VIEW 4: IPSEC ANALYSIS -->
             <section class="view-panel" id="view-ipsec">
                 <div class="section-header-row">
                     <div>
@@ -1306,7 +1502,7 @@
                 </div>
             </section>
 
-            <!-- VIEW 5: AI ANALYSIS (Matches Desktop WPF Screenshot) -->
+            <!-- VIEW 5: AI ANALYSIS -->
             <section class="view-panel" id="view-ai">
                 <div class="section-header-row">
                     <div>
@@ -1320,11 +1516,11 @@
                     <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
                         <div style="flex: 1; min-width: 280px;">
                             <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Analyze a PCAP to generate AI results.</h4>
-                            <p style="font-size: 12.5px; color: var(--accent-warning); font-weight: 600; margin-bottom: 6px;" id="aiEnvStatus">Python AI environment is not configured.</p>
+                            <p style="font-size: 12.5px; color: var(--accent-warning); font-weight: 600; margin-bottom: 6px;" id="aiEnvStatus">Python AI inference pipeline initialized.</p>
                             <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">The AI engine uses a trained Random Forest classifier and Isolation Forest anomaly detector to classify encrypted IPsec traffic patterns using only metadata (no payload inspection).</p>
                         </div>
                         <button class="btn-primary" id="btnRunAi" onclick="runAiAnalysis()" style="white-space: nowrap; align-self: flex-start;">
-                            Run AI Analysis
+                            Run AI Inference
                         </button>
                     </div>
                 </div>
@@ -1419,12 +1615,12 @@
                 </div>
             </section>
 
-            <!-- VIEW 6: SECURITY ASSESSMENT & FINDINGS -->
+            <!-- VIEW 6: FINDINGS -->
             <section class="view-panel" id="view-findings">
                 <div class="section-header-row">
                     <div>
                         <h2 class="section-header-title">Deterministic Vulnerability Findings</h2>
-                        <p class="section-header-subtitle">Deterministic evaluation against NIST SP 800-77, CNSA, and RFC standards.</p>
+                        <p class="section-header-subtitle">Deterministic evaluation against NIST SP 800-77 Rev. 1, CNSA 2.0, and RFC standards.</p>
                     </div>
                 </div>
                 <div class="data-table-container">
@@ -1438,13 +1634,13 @@
                                 <th>Status / Evidence</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr><td><code>IPSEC-IKE-001</code></td><td>IKE Protocol</td><td><span class="badge-severity sev-medium">Medium</span></td><td>Detects deprecated IKEv1 protocol usage (RFC 2409).</td><td><span class="tag-passed">Passed (IKEv2 active)</span></td></tr>
-                            <tr><td><code>IPSEC-CRYPTO-001</code></td><td>Cipher Strength</td><td><span class="badge-severity sev-critical">Critical</span></td><td>Detects weak ciphers (3DES, DES) or unencrypted transforms.</td><td><span class="tag-passed">Passed (AES-256-GCM)</span></td></tr>
-                            <tr><td><code>IPSEC-CRYPTO-002</code></td><td>Integrity Hash</td><td><span class="badge-severity sev-high">High</span></td><td>Flags deprecated hashes (MD5, HMAC-MD5, SHA-1).</td><td><span class="tag-passed">Passed (HMAC-SHA256)</span></td></tr>
-                            <tr><td><code>IPSEC-CRYPTO-003</code></td><td>Diffie-Hellman</td><td><span class="badge-severity sev-high">High</span></td><td>Flags sub-2048-bit MODP DH groups (Group 1, Group 2).</td><td><span class="tag-passed">Passed (Group 14)</span></td></tr>
-                            <tr><td><code>IPSEC-CONFIG-001</code></td><td>Forward Secrecy</td><td><span class="badge-severity sev-medium">Medium</span></td><td>Flags disabled Perfect Forward Secrecy on Child SAs.</td><td><span class="tag-passed">Passed (PFS Enabled)</span></td></tr>
-                            <tr><td><code>IPSEC-CONFIG-002</code></td><td>Anti-Replay</td><td><span class="badge-severity sev-high">High</span></td><td>Detects disabled or corrupted ESP Anti-Replay window.</td><td><span class="tag-passed">Passed (Window Size: 64)</span></td></tr>
+                        <tbody id="findingsTableBody">
+                            <tr><td><code>IPSEC-IKE-001</code></td><td>IKE Protocol</td><td><span class="badge-severity sev-medium">Medium</span></td><td>Detects deprecated IKEv1 protocol usage (RFC 2409).</td><td><span class="tag-passed" id="evIkeVer">Passed (IKEv2 active)</span></td></tr>
+                            <tr><td><code>IPSEC-CRYPTO-001</code></td><td>Cipher Strength</td><td><span class="badge-severity sev-critical">Critical</span></td><td>Detects weak ciphers (3DES, DES) or unencrypted transforms.</td><td><span class="tag-passed" id="evCipher">Passed (AES-256-GCM)</span></td></tr>
+                            <tr><td><code>IPSEC-CRYPTO-002</code></td><td>Integrity Hash</td><td><span class="badge-severity sev-high">High</span></td><td>Flags deprecated hashes (MD5, HMAC-MD5, SHA-1).</td><td><span class="tag-passed" id="evHash">Passed (HMAC-SHA256)</span></td></tr>
+                            <tr><td><code>IPSEC-CRYPTO-003</code></td><td>Diffie-Hellman</td><td><span class="badge-severity sev-high">High</span></td><td>Flags sub-2048-bit MODP DH groups (Group 1, Group 2).</td><td><span class="tag-passed" id="evDh">Passed (Group 14)</span></td></tr>
+                            <tr><td><code>IPSEC-CONFIG-001</code></td><td>Forward Secrecy</td><td><span class="badge-severity sev-medium">Medium</span></td><td>Flags disabled Perfect Forward Secrecy on Child SAs.</td><td><span class="tag-passed" id="evPfs">Passed (PFS Enabled)</span></td></tr>
+                            <tr><td><code>IPSEC-CONFIG-002</code></td><td>Anti-Replay</td><td><span class="badge-severity sev-high">High</span></td><td>Detects disabled or corrupted ESP Anti-Replay window.</td><td><span class="tag-passed" id="evReplay">Passed (Window Size: 64)</span></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1459,9 +1655,9 @@
                     </div>
                 </div>
                 <div class="cards-grid">
-                    <div class="soc-card"><span class="card-label">Overall Risk Score</span><div class="card-value highlight-score" style="color: var(--accent-success);">0 / 100</div><div class="card-subtext">No critical or high vulnerabilities</div></div>
-                    <div class="soc-card"><span class="card-label">Risk Band</span><div class="card-value" style="color: var(--accent-success);">Low Risk</div><div class="card-subtext">Deterministic evaluation</div></div>
-                    <div class="soc-card"><span class="card-label">Parameter Coverage</span><div class="card-value" style="color: var(--accent-cyan);">100%</div><div class="card-subtext">8 of 8 parameters assessed</div></div>
+                    <div class="soc-card"><span class="card-label">Overall Risk Score</span><div class="card-value highlight-score" id="assessScore" style="color: var(--accent-success);">0 / 100</div><div class="card-subtext" id="assessScoreSub">No critical or high vulnerabilities</div></div>
+                    <div class="soc-card"><span class="card-label">Risk Band</span><div class="card-value" id="assessBand" style="color: var(--accent-success);">Low Risk</div><div class="card-subtext">Deterministic evaluation</div></div>
+                    <div class="soc-card"><span class="card-label">Parameter Coverage</span><div class="card-value" id="assessCoverage" style="color: var(--accent-cyan);">100%</div><div class="card-subtext">8 of 8 parameters assessed</div></div>
                     <div class="soc-card"><span class="card-label">Active Rules Evaluated</span><div class="card-value">10 Rules</div><div class="card-subtext">NIST SP 800-77 Rev. 1</div></div>
                 </div>
             </section>
@@ -1474,34 +1670,120 @@
                         <p class="section-header-subtitle">Actionable, prioritized engineering steps to eliminate detected protocol and configuration weaknesses.</p>
                     </div>
                 </div>
-                <div class="soc-card" style="margin-bottom: 12px; border-left: 4px solid var(--accent-success);">
-                    <h4 style="font-size: 14px; margin-bottom: 4px;">Maintain AES-GCM Authenticated Encryption</h4>
-                    <p style="font-size: 12.5px; color: var(--text-secondary);">Your active IKE and ESP tunnels are operating using AES-256-GCM with 16-byte ICV. Ensure all fallback proposals to 3DES or DES remain completely disabled on the VPN gateway.</p>
-                </div>
-                <div class="soc-card" style="margin-bottom: 12px; border-left: 4px solid var(--accent-cyan);">
-                    <h4 style="font-size: 14px; margin-bottom: 4px;">Future Post-Quantum Readiness</h4>
-                    <p style="font-size: 12.5px; color: var(--text-secondary);">Diffie-Hellman Group 14 (2048-bit MODP) provides adequate classical security. Consider preparing an upgrade plan for DH Group 19 (256-bit ECP) or hybrid post-quantum key exchange (RFC 9370).</p>
+                <div id="recommendationsList">
+                    <div class="soc-card" style="margin-bottom: 12px; border-left: 4px solid var(--accent-success);">
+                        <h4 style="font-size: 14px; margin-bottom: 4px;">Maintain AES-GCM Authenticated Encryption</h4>
+                        <p style="font-size: 12.5px; color: var(--text-secondary);">Your active IKE and ESP tunnels are operating using AES-256-GCM with 16-byte ICV. Ensure all fallback proposals to 3DES or DES remain completely disabled on the VPN gateway.</p>
+                    </div>
+                    <div class="soc-card" style="margin-bottom: 12px; border-left: 4px solid var(--accent-cyan);">
+                        <h4 style="font-size: 14px; margin-bottom: 4px;">Future Post-Quantum Readiness</h4>
+                        <p style="font-size: 12.5px; color: var(--text-secondary);">Diffie-Hellman Group 14 (2048-bit MODP) provides adequate classical security. Consider preparing an upgrade plan for DH Group 19 (256-bit ECP) or hybrid post-quantum key exchange (RFC 9370).</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- VIEW 9: REPORTS -->
+            <!-- VIEW 9: REPORTS (FULL COMPLIANCE GENERATOR) -->
             <section class="view-panel" id="view-reports">
                 <div class="section-header-row">
                     <div>
-                        <h2 class="section-header-title">Compliance Reports &amp; Exports</h2>
-                        <p class="section-header-subtitle">Generate auditable ISO 32000-1 compliant PDF reports and formatted JSON security snapshots.</p>
+                        <h2 class="section-header-title">Compliance Reports &amp; Security Exports</h2>
+                        <p class="section-header-subtitle">Generate auditable ISO 32000-1 compliant PDF reports and machine-readable JSON SIEM audit snapshots.</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-primary" onclick="generatePdfReport()">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                            Export PDF Report
+                        </button>
+                        <button class="btn-secondary" onclick="exportJsonAudit()">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                            Export SIEM JSON
+                        </button>
                     </div>
                 </div>
-                <div class="cards-grid">
-                    <div class="soc-card" style="text-align: center; padding: 24px;">
-                        <h4 style="margin-bottom: 8px;">Executive PDF Report</h4>
-                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Formal compliance audit document with NIST cross-references.</p>
-                        <button class="btn-primary" style="margin: 0 auto;" onclick="alert('Exporting ISO 32000-1 PDF Compliance Report...')">Export PDF Report</button>
+
+                <!-- Report Configuration Card -->
+                <div class="soc-card" style="margin-bottom: 20px; padding: 20px 24px;">
+                    <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Audit Report Configuration</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;">
+                        <div>
+                            <label style="display: block; font-size: 11.5px; color: var(--text-muted); margin-bottom: 5px;">Report Title:</label>
+                            <input type="text" id="reportTitleInput" value="IPsec Protocol &amp; Cryptographic Security Audit" style="width: 100%; background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 7px 10px; border-radius: 6px; font-size: 12px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 11.5px; color: var(--text-muted); margin-bottom: 5px;">Target Organization / Host:</label>
+                            <input type="text" id="reportOrgInput" value="Enterprise Gateway (198.51.100.1)" style="width: 100%; background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 7px 10px; border-radius: 6px; font-size: 12px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 11.5px; color: var(--text-muted); margin-bottom: 5px;">Compliance Framework:</label>
+                            <input type="text" id="reportFrameworkInput" value="NIST SP 800-77 Rev. 1 &amp; CNSA 2.0" style="width: 100%; background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 7px 10px; border-radius: 6px; font-size: 12px;">
+                        </div>
                     </div>
-                    <div class="soc-card" style="text-align: center; padding: 24px;">
-                        <h4 style="margin-bottom: 8px;">SIEM JSON Snapshot</h4>
-                        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Structured JSON export suitable for Splunk / Elastic SIEM ingestion.</p>
-                        <button class="btn-secondary" style="margin: 0 auto;" onclick="alert('Exporting JSON Audit Snapshot...')">Export JSON Audit</button>
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;">Sections Included:</span>
+                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" checked id="chkSecExec"> Executive Summary</label>
+                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" checked id="chkSecCrypto"> Cryptographic Dissection</label>
+                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" checked id="chkSecFindings"> Vulnerability Findings</label>
+                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" checked id="chkSecAI"> AI Behavioral Telemetry</label>
+                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;"><input type="checkbox" checked id="chkSecRemed"> Remediation Roadmap</label>
+                    </div>
+                </div>
+
+                <!-- Live Report Document Preview -->
+                <div class="report-doc-preview" id="reportPreviewContainer">
+                    <div class="report-title-banner">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h2 style="font-size: 18px; color: #F8FAFC;" id="previewReportTitle">IPsec Protocol &amp; Cryptographic Security Audit</h2>
+                            <span style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; border: 1px solid rgba(6, 182, 212, 0.3);">ISO 32000-1 COMPLIANT</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Automated Cybersecurity Evaluation generated by VPNGuard SOC Platform v1.0.0</p>
+                    </div>
+
+                    <div class="report-meta-grid">
+                        <div><strong>Target Capture:</strong> <span id="rptMetaCapture">vpn_ikev2_enterprise.pcapng</span></div>
+                        <div><strong>Audit Date:</strong> <span id="rptMetaDate">2026-09-30 09:30:00 UTC</span></div>
+                        <div><strong>Overall Risk Posture:</strong> <span id="rptMetaScore" style="color: var(--accent-success); font-weight: 700;">0 / 100 (Low Risk)</span></div>
+                        <div><strong>Target Gateway:</strong> <span id="rptMetaOrg">Enterprise Gateway (198.51.100.1)</span></div>
+                    </div>
+
+                    <!-- Section 1 -->
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 14px; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">1. Executive Summary &amp; Risk Posture</h3>
+                        <p style="font-size: 12.5px; margin-bottom: 8px;" id="rptExecSummaryText">
+                            The inspected packet capture exhibits full alignment with NIST SP 800-77 Rev. 1 guidelines. The IKEv2 negotiation enforces authenticated encryption using AES-256-GCM with 2048-bit MODP Diffie-Hellman Group 14. No critical or elevated cryptographic defects were observed in the examined session flows.
+                        </p>
+                    </div>
+
+                    <!-- Section 2 -->
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 14px; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">2. Observed Cryptographic Parameters</h3>
+                        <table class="soc-table" style="font-size: 12px;">
+                            <thead>
+                                <tr><th>Parameter</th><th>Observed Value</th><th>Standard Requirement</th><th>Evaluation</th></tr>
+                            </thead>
+                            <tbody id="rptCryptoTableBody">
+                                <tr><td>IKE Protocol</td><td>IKEv2 (RFC 7296)</td><td>IKEv2 Mandatory</td><td><span class="tag-passed">Compliant</span></td></tr>
+                                <tr><td>Encryption Cipher</td><td>AES-256-GCM (AEAD)</td><td>AES-128 / AES-256 GCM</td><td><span class="tag-passed">Compliant</span></td></tr>
+                                <tr><td>Integrity Algorithm</td><td>HMAC-SHA256 (16B ICV)</td><td>SHA-256 or AEAD</td><td><span class="tag-passed">Compliant</span></td></tr>
+                                <tr><td>Diffie-Hellman Group</td><td>Group 14 (2048-bit MODP)</td><td>Group &gt;= 14</td><td><span class="tag-passed">Compliant</span></td></tr>
+                                <tr><td>Perfect Forward Secrecy</td><td>Enabled (PFS Group 14)</td><td>Mandatory for Child SAs</td><td><span class="tag-passed">Compliant</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Section 3 -->
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 14px; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">3. AI Behavioral Intelligence &amp; Anomaly Telemetry</h3>
+                        <p style="font-size: 12.5px;" id="rptAiSummaryText">
+                            Traffic classification model (Random Forest, 23-dimensional feature space) classified the encrypted flow as <strong>VPN Tunnel / Web Traffic</strong> with <strong>98.42% confidence</strong>. Isolation Forest anomaly detector computed a score of <strong>0.12 (Normal)</strong>, confirming benign operational behavior.
+                        </p>
+                    </div>
+
+                    <!-- Section 4 -->
+                    <div>
+                        <h3 style="font-size: 14px; color: var(--accent-cyan); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">4. Formal Auditor Certification</h3>
+                        <p style="font-size: 11.5px; color: var(--text-muted);">
+                            This evaluation represents a passive, non-intrusive cryptographic analysis performed on captured packet metadata. Encrypted payload contents remained confidential and were not decrypted during this assessment.
+                        </p>
                     </div>
                 </div>
             </section>
@@ -1526,10 +1808,10 @@
                                 <th>AI Traffic Type</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="auditHistoryTableBody">
                             <tr><td>#8941</td><td>2026-09-29 17:15:00</td><td>vpn_ikev2_enterprise.pcapng</td><td><span class="tag-passed">0/100 (Low)</span></td><td>100%</td><td>VPN Tunnel / Web</td></tr>
-                            <tr><td>#8940</td><td>2026-09-28 14:22:10</td><td>legacy_3des_test.pcap</td><td><span class="tag-failed">65/100 (High)</span></td><td>87.5%</td><td>Web Browsing / Unknown</td></tr>
-                            <tr><td>#8939</td><td>2026-09-27 10:04:35</td><td>ikev1_aggressive_demo.pcap</td><td><span class="tag-failed">75/100 (High)</span></td><td>75.0%</td><td>IKE Handshake Only</td></tr>
+                            <tr><td>#8940</td><td>2026-09-28 14:22:10</td><td>legacy_3des_test.pcap</td><td><span class="tag-failed">75/100 (High)</span></td><td>87.5%</td><td>Web Browsing / Unknown</td></tr>
+                            <tr><td>#8939</td><td>2026-09-27 10:04:35</td><td>ikev1_aggressive_demo.pcap</td><td><span class="tag-failed">65/100 (High)</span></td><td>75.0%</td><td>IKE Handshake Only</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1559,8 +1841,201 @@
         </div>
     </main>
 
+    <!-- Packet Details Modal -->
+    <div class="modal-overlay" id="packetModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 style="font-size: 16px; font-weight: 700;" id="modalPacketTitle">Packet Dissection Inspector</h3>
+                <button class="modal-close" onclick="closePacketModal()">&times;</button>
+            </div>
+            <div id="modalPacketContent">
+                <!-- Populated on click -->
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Tab Navigation
+        // ==================== STATE & SCENARIO DATABASE ====================
+        const scenarios = {
+            ikev2_enterprise: {
+                fileName: 'vpn_ikev2_enterprise.pcapng',
+                filePath: 'C:\\Captures\\vpn_ikev2_enterprise.pcapng',
+                fileSize: '1.42 MB (1,489,200 bytes)',
+                ext: '.PCAPNG',
+                packets: 1240,
+                ipsecPkts: 1210,
+                ikePkts: 4,
+                espPkts: 1206,
+                riskScore: 0,
+                riskBand: 'Low Risk',
+                riskClassColor: 'var(--accent-success)',
+                coverage: '100%',
+                findingsCount: '0 Vulnerabilities',
+                aiType: 'VPN / Web Traffic',
+                aiConfidence: '98.42%',
+                aiAnomaly: 'Normal (No Anomaly)',
+                aiAnomalyScore: '0.12 (Normal)',
+                aiProtocol: 'IPsec ESP (Genuine Tunnel)',
+                ikeVersion: 'IKEv2 (RFC 7296)',
+                ikeAuth: 'RSA Digital Signature',
+                ikeCipher: 'AES-256-GCM (AEAD, 16B ICV)',
+                ikeHash: 'HMAC-SHA256',
+                ikeDh: 'Group 14 (2048-bit MODP)',
+                pfs: 'Enabled (Group 14)',
+                replay: 'Enabled (Window 64)',
+                packetsData: [
+                    { no: 1, time: '0.000000', src: '192.168.1.105', dst: '198.51.100.1', proto: 'IKEv2', len: 448, spi: '0xa93b482fce01', info: 'IKE_SA_INIT Request: SPIi=a93b482fce01, Prop: AES-256-GCM, DH Group 14' },
+                    { no: 2, time: '0.042180', src: '198.51.100.1', dst: '192.168.1.105', proto: 'IKEv2', len: 464, spi: '0x582c091931de', info: 'IKE_SA_INIT Response: SPIr=582c091931de, Selected: AES-256-GCM, DH 14' },
+                    { no: 3, time: '0.089201', src: '192.168.1.105', dst: '198.51.100.1', proto: 'IKEv2', len: 320, spi: '0xa93b482fce01', info: 'IKE_AUTH Request: Encrypted Payload (SK), Child SA Proposal' },
+                    { no: 4, time: '0.125430', src: '198.51.100.1', dst: '192.168.1.105', proto: 'IKEv2', len: 304, spi: '0x582c091931de', info: 'IKE_AUTH Response: Child SA Established, ESP SPI=0x4a88f190' },
+                    { no: 5, time: '0.140220', src: '192.168.1.105', dst: '198.51.100.1', proto: 'ESP', len: 1420, spi: '0x4a88f190', info: 'ESP Seq=1, SPI=0x4a88f190, IV=16B, Auth-Tag=16B (AES-GCM)' },
+                    { no: 6, time: '0.140880', src: '198.51.100.1', dst: '192.168.1.105', proto: 'ESP', len: 1380, spi: '0x582c0919', info: 'ESP Seq=1, SPI=0x582c0919, Return TLS application data' },
+                    { no: 7, time: '0.165400', src: '192.168.1.105', dst: '198.51.100.1', proto: 'ESP', len: 1420, spi: '0x4a88f190', info: 'ESP Seq=2, SPI=0x4a88f190, Forward tunnel throughput' },
+                    { no: 8, time: '0.198300', src: '198.51.100.1', dst: '192.168.1.105', proto: 'ESP', len: 860, spi: '0x582c0919', info: 'ESP Seq=2, SPI=0x582c0919, Auth-Tag verified' }
+                ],
+                findings: [
+                    { id: 'IPSEC-IKE-001', cat: 'IKE Protocol', sev: 'Medium', desc: 'Detects deprecated IKEv1 protocol usage (RFC 2409).', status: 'Passed (IKEv2 active)', passed: true },
+                    { id: 'IPSEC-CRYPTO-001', cat: 'Cipher Strength', sev: 'Critical', desc: 'Detects weak ciphers (3DES, DES) or unencrypted transforms.', status: 'Passed (AES-256-GCM)', passed: true },
+                    { id: 'IPSEC-CRYPTO-002', cat: 'Integrity Hash', sev: 'High', desc: 'Flags deprecated hashes (MD5, HMAC-MD5, SHA-1).', status: 'Passed (HMAC-SHA256)', passed: true },
+                    { id: 'IPSEC-CRYPTO-003', cat: 'Diffie-Hellman', sev: 'High', desc: 'Flags sub-2048-bit MODP DH groups (Group 1, Group 2).', status: 'Passed (Group 14)', passed: true },
+                    { id: 'IPSEC-CONFIG-001', cat: 'Forward Secrecy', sev: 'Medium', desc: 'Flags disabled Perfect Forward Secrecy on Child SAs.', status: 'Passed (PFS Enabled)', passed: true },
+                    { id: 'IPSEC-CONFIG-002', cat: 'Anti-Replay', sev: 'High', desc: 'Detects disabled or corrupted ESP Anti-Replay window.', status: 'Passed (Window Size: 64)', passed: true }
+                ],
+                recs: [
+                    { title: 'Maintain AES-GCM Authenticated Encryption', desc: 'Active IKE and ESP tunnels are operating using AES-256-GCM with 16-byte ICV. Ensure fallback proposals to 3DES remain disabled on gateway.' },
+                    { title: 'Future Post-Quantum Readiness', desc: 'Diffie-Hellman Group 14 (2048-bit MODP) provides adequate classical security. Consider preparing an upgrade plan for DH Group 19 (256-bit ECP).' }
+                ]
+            },
+            legacy_3des: {
+                fileName: 'legacy_ikev1_3des_weak.pcap',
+                filePath: 'C:\\Captures\\legacy_ikev1_3des_weak.pcap',
+                fileSize: '840 KB (860,160 bytes)',
+                ext: '.PCAP',
+                packets: 840,
+                ipsecPkts: 810,
+                ikePkts: 6,
+                espPkts: 804,
+                riskScore: 75,
+                riskBand: 'High Risk',
+                riskClassColor: 'var(--accent-danger)',
+                coverage: '87.5%',
+                findingsCount: '3 Vulnerabilities Detected',
+                aiType: 'Encrypted Legacy / Web Traffic',
+                aiConfidence: '94.10%',
+                aiAnomaly: 'Suspicious Weak Transform',
+                aiAnomalyScore: '0.68 (Elevated)',
+                aiProtocol: 'Legacy IPsec (3DES-CBC)',
+                ikeVersion: 'IKEv1 (Aggressive Mode - Deprecated)',
+                ikeAuth: 'Pre-Shared Key (PSK)',
+                ikeCipher: '3DES-CBC (Sweet32 Vulnerable)',
+                ikeHash: 'HMAC-MD5 (Cryptographically Broken)',
+                ikeDh: 'Group 2 (1024-bit MODP - Weak)',
+                pfs: 'Disabled',
+                replay: 'Enabled (Window 32)',
+                packetsData: [
+                    { no: 1, time: '0.000000', src: '192.168.1.105', dst: '198.51.100.1', proto: 'ISAKMP', len: 284, spi: '0xfe90124a', info: 'IKEv1 Aggressive Mode Request: PSK, 3DES-CBC, MD5, DH Group 2' },
+                    { no: 2, time: '0.035120', src: '198.51.100.1', dst: '192.168.1.105', proto: 'ISAKMP', len: 312, spi: '0xbc441099', info: 'IKEv1 Aggressive Mode Response: Hash verification sent in cleartext' },
+                    { no: 3, time: '0.071200', src: '192.168.1.105', dst: '198.51.100.1', proto: 'ISAKMP', len: 140, spi: '0xfe90124a', info: 'IKEv1 Quick Mode: ESP Proposal (3DES + HMAC-MD5, No PFS)' },
+                    { no: 4, time: '0.098400', src: '192.168.1.105', dst: '198.51.100.1', proto: 'ESP', len: 1200, spi: '0x12a9c450', info: 'ESP 3DES-CBC encrypted flow, 64-bit block size' }
+                ],
+                findings: [
+                    { id: 'IPSEC-IKE-001', cat: 'IKE Protocol', sev: 'Medium', desc: 'Detects deprecated IKEv1 protocol usage (RFC 2409).', status: 'FAILED (IKEv1 Aggressive Mode)', passed: false },
+                    { id: 'IPSEC-CRYPTO-001', cat: 'Cipher Strength', sev: 'Critical', desc: 'Detects weak ciphers (3DES, DES) or unencrypted transforms.', status: 'FAILED (3DES-CBC detected - Sweet32 vulnerable)', passed: false },
+                    { id: 'IPSEC-CRYPTO-002', cat: 'Integrity Hash', sev: 'High', desc: 'Flags deprecated hashes (MD5, HMAC-MD5, SHA-1).', status: 'FAILED (HMAC-MD5 collision risk)', passed: false },
+                    { id: 'IPSEC-CRYPTO-003', cat: 'Diffie-Hellman', sev: 'High', desc: 'Flags sub-2048-bit MODP DH groups (Group 1, Group 2).', status: 'FAILED (DH Group 2 - 1024-bit insufficient)', passed: false }
+                ],
+                recs: [
+                    { title: 'Immediate Upgrade: Migrate to IKEv2', desc: 'IKEv1 Aggressive mode exposes identity hashes to offline dictionary attacks. Upgrade gateway to IKEv2 (RFC 7296).' },
+                    { title: 'Deprecate 3DES and MD5', desc: 'Replace 3DES-CBC and MD5 with AES-256-GCM or AES-128-CBC with HMAC-SHA256 to prevent collision and birthday attacks.' }
+                ]
+            },
+            ikev2_no_pfs: {
+                fileName: 'ikev2_weak_dh_no_pfs.pcap',
+                filePath: 'C:\\Captures\\ikev2_weak_dh_no_pfs.pcap',
+                fileSize: '620 KB (634,880 bytes)',
+                ext: '.PCAP',
+                packets: 520,
+                ipsecPkts: 512,
+                ikePkts: 4,
+                espPkts: 508,
+                riskScore: 50,
+                riskBand: 'Moderate Risk',
+                riskClassColor: 'var(--accent-warning)',
+                coverage: '90%',
+                findingsCount: '2 Findings Detected',
+                aiType: 'VPN Tunnel / Database Replication',
+                aiConfidence: '91.20%',
+                aiAnomaly: 'Normal Traffic Pattern',
+                aiAnomalyScore: '0.24 (Normal)',
+                aiProtocol: 'IPsec ESP (AES-128-CBC)',
+                ikeVersion: 'IKEv2 (RFC 7296)',
+                ikeAuth: 'RSA Digital Signature',
+                ikeCipher: 'AES-128-CBC',
+                ikeHash: 'HMAC-SHA256',
+                ikeDh: 'Group 5 (1536-bit MODP - Sub-standard)',
+                pfs: 'Disabled (No Child SA Re-key DH)',
+                replay: 'Enabled (Window 64)',
+                packetsData: [
+                    { no: 1, time: '0.000000', src: '10.0.0.12', dst: '172.16.0.1', proto: 'IKEv2', len: 412, spi: '0x44b20911', info: 'IKE_SA_INIT: AES-128-CBC, DH Group 5 (1536-bit)' },
+                    { no: 2, time: '0.038100', src: '172.16.0.1', dst: '10.0.0.12', proto: 'IKEv2', len: 420, spi: '0x8892ca01', info: 'IKE_SA_INIT Response: Selected Group 5' },
+                    { no: 3, time: '0.075400', src: '10.0.0.12', dst: '172.16.0.1', proto: 'IKEv2', len: 290, spi: '0x44b20911', info: 'IKE_AUTH: Child SA proposal without PFS payload' },
+                    { no: 4, time: '0.110200', src: '10.0.0.12', dst: '172.16.0.1', proto: 'ESP', len: 1140, spi: '0x9923bb10', info: 'ESP AES-128-CBC Tunnel' }
+                ],
+                findings: [
+                    { id: 'IPSEC-CRYPTO-003', cat: 'Diffie-Hellman', sev: 'High', desc: 'Flags sub-2048-bit MODP DH groups (Group 1, Group 2, Group 5).', status: 'FAILED (DH Group 5 is below 2048-bit minimum)', passed: false },
+                    { id: 'IPSEC-CONFIG-001', cat: 'Forward Secrecy', sev: 'Medium', desc: 'Flags disabled Perfect Forward Secrecy on Child SAs.', status: 'FAILED (PFS Disabled - compromise of IKE SA exposes ESP)', passed: false }
+                ],
+                recs: [
+                    { title: 'Enable Perfect Forward Secrecy (PFS)', desc: 'Configure Child SA proposal to mandate Diffie-Hellman re-keying on every session expiration.' },
+                    { title: 'Upgrade DH Group to Group 14 or Group 19', desc: 'Deprecate 1536-bit Group 5 in favor of at least 2048-bit Group 14 (RFC 8221 requirement).' }
+                ]
+            },
+            anomalous_tunnel: {
+                fileName: 'anomalous_tunnel_exfiltration.pcap',
+                filePath: 'C:\\Captures\\anomalous_tunnel_exfiltration.pcap',
+                fileSize: '3.10 MB (3,250,585 bytes)',
+                ext: '.PCAP',
+                packets: 2450,
+                ipsecPkts: 2420,
+                ikePkts: 4,
+                espPkts: 2416,
+                riskScore: 65,
+                riskBand: 'Elevated Risk',
+                riskClassColor: 'var(--accent-warning)',
+                coverage: '95%',
+                findingsCount: '1 Behavioral Anomaly Flagged',
+                aiType: 'High-Volume Exfiltration / Proxy Tunnel',
+                aiConfidence: '96.80%',
+                aiAnomaly: 'ANOMALY DETECTED (Isolation Forest)',
+                aiAnomalyScore: '0.88 (High Anomaly)',
+                aiProtocol: 'Encrypted Non-Standard Tunnel',
+                ikeVersion: 'IKEv2 (RFC 7296)',
+                ikeAuth: 'RSA Digital Signature',
+                ikeCipher: 'AES-256-GCM',
+                ikeHash: 'HMAC-SHA256',
+                ikeDh: 'Group 14 (2048-bit MODP)',
+                pfs: 'Enabled',
+                replay: 'Enabled',
+                packetsData: [
+                    { no: 1, time: '0.000000', src: '192.168.1.50', dst: '45.33.32.156', proto: 'IKEv2', len: 448, spi: '0x99a0b122', info: 'IKE_SA_INIT: AES-256-GCM, DH 14' },
+                    { no: 2, time: '0.041000', src: '45.33.32.156', dst: '192.168.1.50', proto: 'IKEv2', len: 460, spi: '0x11223344', info: 'IKE_SA_INIT Response' },
+                    { no: 3, time: '0.082000', src: '192.168.1.50', dst: '45.33.32.156', proto: 'ESP', len: 1480, spi: '0x77665544', info: 'ESP Asymmetric burst: Outbound packet ratio 98:2' },
+                    { no: 4, time: '0.082400', src: '192.168.1.50', dst: '45.33.32.156', proto: 'ESP', len: 1480, spi: '0x77665544', info: 'ESP High entropy continuous payload transmission' }
+                ],
+                findings: [
+                    { id: 'IPSEC-AI-001', cat: 'Behavioral ML', sev: 'High', desc: 'Flags highly asymmetric throughput consistent with data exfiltration.', status: 'FLAGGED (Isolation Forest score 0.88 &gt; threshold 0.50)', passed: false }
+                ],
+                recs: [
+                    { title: 'Investigate Asymmetric Flow to Destination IP', desc: 'Inspect source host 192.168.1.50 transferring continuous large ESP bursts to unclassified remote endpoint.' }
+                ]
+            }
+        };
+
+        let currentScenarioKey = 'ikev2_enterprise';
+        let currentScenario = scenarios.ikev2_enterprise;
+        let isAnalyzed = false;
+
+        // Navigation
         const navItems = document.querySelectorAll('.nav-item');
         const viewPanels = document.querySelectorAll('.view-panel');
         const topHeaderTitle = document.getElementById('topHeaderTitle');
@@ -1611,9 +2086,20 @@
             });
         });
 
-        // PCAP File Selection & Realistic Analysis Simulation
-        let isAnalyzed = false;
+        // Scenario Loader
+        function loadSelectedScenario() {
+            const key = document.getElementById('scenarioSelect').value;
+            currentScenarioKey = key;
+            currentScenario = scenarios[key];
+            
+            document.getElementById('detailFileName').textContent = currentScenario.fileName;
+            document.getElementById('detailFilePath').textContent = currentScenario.filePath;
+            document.getElementById('detailFileSize').textContent = currentScenario.fileSize;
+            document.getElementById('detailFileExt').textContent = currentScenario.ext;
+            document.getElementById('fileDetailsBox').style.display = 'block';
+        }
 
+        // Custom File Upload
         function handleFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
@@ -1621,123 +2107,462 @@
                 document.getElementById('detailFileName').textContent = file.name;
                 document.getElementById('detailFilePath').textContent = 'Selected: ' + file.name;
                 document.getElementById('detailFileSize').textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB (' + file.size.toLocaleString() + ' bytes)';
+                document.getElementById('detailFileExt').textContent = file.name.toUpperCase().endsWith('.PCAPNG') ? '.PCAPNG' : '.PCAP';
                 document.getElementById('topPcapText').textContent = file.name;
+                
+                // Auto trigger analysis on selection
+                triggerPcapSimulation();
             }
         }
 
+        // Trigger Main PCAP Dissection Simulation
         function triggerPcapSimulation() {
             const btnAnalyzeText = document.getElementById('btnAnalyzeText');
-            
-            if (!isAnalyzed) {
-                btnAnalyzeText.textContent = 'Dissecting Packets...';
-                document.getElementById('dashStatusText').textContent = 'Analyzing PCAP...';
+            const progressBox = document.getElementById('analysisProgressBox');
+            const progressBarFill = document.getElementById('progressBarFill');
+            const progressStatusText = document.getElementById('progressStatusText');
+            const progressPctText = document.getElementById('progressPctText');
 
-                setTimeout(() => {
-                    isAnalyzed = true;
-                    btnAnalyzeText.textContent = 'Reset to Initial State';
-                    
-                    // Show file box
-                    document.getElementById('fileDetailsBox').style.display = 'block';
-                    document.getElementById('postAnalysisBar').style.display = 'block';
-                    document.getElementById('topPcapText').textContent = 'vpn_ikev2_enterprise.pcapng';
+            loadSelectedScenario();
 
-                    // Update Top Status
-                    document.getElementById('dashStatusDot').style.backgroundColor = 'var(--accent-success)';
-                    document.getElementById('dashStatusText').textContent = 'Analysis Complete (Low Risk)';
+            progressBox.style.display = 'block';
+            btnAnalyzeText.textContent = 'Dissecting Packets...';
+            document.getElementById('dashStatusText').textContent = 'Analyzing PCAP Stream...';
+            document.getElementById('dashStatusDot').style.backgroundColor = 'var(--accent-warning)';
 
-                    // Populate Traffic Overview
-                    document.getElementById('valTotalPackets').textContent = '1,240 pkts';
-                    document.getElementById('subTotalPackets').textContent = '1.42 MB Captured';
-                    document.getElementById('valIpsecPackets').textContent = '1,210 pkts';
-                    document.getElementById('subIpsecPackets').textContent = '97.5% IPsec Volume';
-                    document.getElementById('valIkeHandshakes').textContent = '4 Handshakes';
-                    document.getElementById('subIkeHandshakes').textContent = 'IKEv2 (RFC 7296)';
-                    document.getElementById('valEspTunnels').textContent = '2 Active Tunnels';
-                    document.getElementById('subEspTunnels').textContent = 'SPI: 0x4a88f190, 0x582c0919';
+            let pct = 0;
+            const stages = [
+                { threshold: 25, label: 'Reading PCAP binary frames & validating checksums...' },
+                { threshold: 50, label: 'Dissecting IKEv2 SA proposals & Diffie-Hellman transforms...' },
+                { threshold: 75, label: 'Evaluating NIST SP 800-77 & RFC deterministic rules...' },
+                { threshold: 95, label: 'Executing AI Random Forest & Isolation Forest inference...' },
+                { threshold: 100, label: 'Analysis Complete.' }
+            ];
 
-                    // Populate Security Assessment
-                    document.getElementById('valRiskScore').textContent = '0 / 100';
-                    document.getElementById('valRiskScore').style.color = 'var(--accent-success)';
-                    document.getElementById('subRiskScore').textContent = 'Compliant (NIST SP 800-77)';
-                    document.getElementById('valRiskClass').textContent = 'Low Risk';
-                    document.getElementById('valRiskClass').style.color = 'var(--accent-success)';
-                    document.getElementById('subRiskClass').textContent = '0 High/Critical Findings';
-                    document.getElementById('valFindings').textContent = '0 Vulnerabilities';
-                    document.getElementById('valFindings').style.color = 'var(--accent-success)';
-                    document.getElementById('valCoverage').textContent = '100% Coverage';
-                    document.getElementById('valCoverage').style.color = 'var(--accent-cyan)';
+            const interval = setInterval(() => {
+                pct += 5;
+                progressBarFill.style.width = pct + '%';
+                progressPctText.textContent = pct + '%';
 
-                    // Populate AI Intelligence
-                    document.getElementById('valAiType').textContent = 'VPN / Web Traffic';
-                    document.getElementById('subAiType').textContent = 'RandomForest (23D features)';
-                    document.getElementById('valAiConf').textContent = '98.42% Confidence';
-                    document.getElementById('valAiConf').style.color = 'var(--accent-cyan)';
-                    document.getElementById('valAiAnomaly').textContent = 'Normal (No Anomaly)';
-                    document.getElementById('valAiAnomaly').style.color = 'var(--accent-success)';
-                    document.getElementById('subAiAnomaly').textContent = 'Isolation Forest Score: 0.12';
-                }, 600);
+                const stage = stages.find(s => pct <= s.threshold) || stages[stages.length - 1];
+                progressStatusText.textContent = stage.label;
+
+                if (pct >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        progressBox.style.display = 'none';
+                        isAnalyzed = true;
+                        btnAnalyzeText.textContent = 'Re-Analyze PCAP';
+                        
+                        applyAnalysisResults(currentScenario);
+                    }, 300);
+                }
+            }, 50);
+        }
+
+        function applyAnalysisResults(data) {
+            // Top Bar
+            document.getElementById('topPcapText').textContent = data.fileName;
+            document.getElementById('dashStatusDot').style.backgroundColor = data.riskScore === 0 ? 'var(--accent-success)' : 'var(--accent-warning)';
+            document.getElementById('dashStatusText').textContent = `Analysis Complete (${data.riskBand})`;
+
+            // Post-Analysis Action Bar
+            document.getElementById('postAnalysisBar').style.display = 'block';
+
+            // Dashboard Metrics
+            document.getElementById('valTotalPackets').textContent = data.packets.toLocaleString() + ' pkts';
+            document.getElementById('subTotalPackets').textContent = data.fileSize.split(' ')[0] + ' MB Captured';
+            document.getElementById('valIpsecPackets').textContent = data.ipsecPkts.toLocaleString() + ' pkts';
+            document.getElementById('subIpsecPackets').textContent = ((data.ipsecPkts / data.packets) * 100).toFixed(1) + '% IPsec Volume';
+            document.getElementById('valIkeHandshakes').textContent = data.ikePkts + ' Frames';
+            document.getElementById('subIkeHandshakes').textContent = data.ikeVersion.split(' ')[0];
+            document.getElementById('valEspTunnels').textContent = data.espPkts > 0 ? '2 Active Tunnels' : '0 Tunnels';
+            document.getElementById('subEspTunnels').textContent = 'ESP Flow Verified';
+
+            // Security Metrics
+            document.getElementById('valRiskScore').textContent = data.riskScore + ' / 100';
+            document.getElementById('valRiskScore').style.color = data.riskClassColor;
+            document.getElementById('subRiskScore').textContent = data.riskScore === 0 ? 'Compliant (NIST SP 800-77)' : 'Non-Compliant Findings';
+            document.getElementById('valRiskClass').textContent = data.riskBand;
+            document.getElementById('valRiskClass').style.color = data.riskClassColor;
+            document.getElementById('subRiskClass').textContent = data.findingsCount;
+            document.getElementById('valFindings').textContent = data.findingsCount;
+            document.getElementById('valFindings').style.color = data.riskClassColor;
+            document.getElementById('valCoverage').textContent = data.coverage;
+            document.getElementById('valCoverage').style.color = 'var(--accent-cyan)';
+
+            // AI Metrics
+            document.getElementById('valAiType').textContent = data.aiType;
+            document.getElementById('subAiType').textContent = 'RandomForest (23D features)';
+            document.getElementById('valAiConf').textContent = data.aiConfidence;
+            document.getElementById('valAiConf').style.color = 'var(--accent-cyan)';
+            document.getElementById('valAiAnomaly').textContent = data.aiAnomaly;
+            document.getElementById('valAiAnomaly').style.color = data.aiAnomaly.includes('Normal') ? 'var(--accent-success)' : 'var(--accent-danger)';
+            document.getElementById('subAiAnomaly').textContent = 'Isolation Forest Score: ' + data.aiAnomalyScore;
+
+            // Populate PCAP Table
+            renderPcapTable(data.packetsData);
+
+            // Populate IPsec Tab
+            document.getElementById('ikeVersion').textContent = data.ikeVersion;
+            document.getElementById('ikePacketCount').textContent = data.ikePkts + ' packets';
+            document.getElementById('ikeExchangeType').textContent = data.ikeVersion.includes('v2') ? 'IKE_SA_INIT + IKE_AUTH' : 'Aggressive Mode + Quick Mode';
+            document.getElementById('ikeAuth').textContent = data.ikeAuth;
+            document.getElementById('ikeEncAlgo').textContent = data.ikeCipher;
+            document.getElementById('ikeDhGroup').textContent = data.ikeDh;
+
+            document.getElementById('ikeSaProposalRows').innerHTML = `
+                <tr><td>1</td><td>${data.ikeVersion.split(' ')[0]}</td><td style="color:${data.ikeCipher.includes('3DES') ? 'var(--accent-danger)' : 'var(--accent-success)'}">${data.ikeCipher}</td><td>${data.ikeHash}</td><td>${data.ikeDh}</td><td>${data.ikeAuth}</td><td>256</td></tr>
+                <tr><td>2</td><td>ESP</td><td style="color:var(--accent-success);">${data.ikeCipher}</td><td>${data.ikeHash}</td><td>${data.pfs}</td><td>—</td><td>256</td></tr>
+            `;
+
+            document.getElementById('ikeHandshakeRows').innerHTML = data.packetsData.map(p => `
+                <tr onclick="inspectPacket(${p.no})">
+                    <td>${p.no}</td>
+                    <td>${p.time}</td>
+                    <td>${data.ikeVersion.split(' ')[0]}</td>
+                    <td>${p.proto}</td>
+                    <td>${p.spi}</td>
+                    <td>${p.info}</td>
+                    <td>14</td>
+                    <td style="color:${p.src.startsWith('192') ? 'var(--accent-cyan)' : 'var(--accent-success)'}">${p.src.startsWith('192') ? 'Initiator' : 'Responder'}</td>
+                </tr>
+            `).join('');
+
+            // Populate AI Tab
+            document.getElementById('aiTrafficType').textContent = data.aiType;
+            document.getElementById('aiConfidence').textContent = data.aiConfidence;
+            document.getElementById('aiAnomalyStatus').textContent = data.aiAnomaly;
+            document.getElementById('aiAnomalyStatus').style.color = data.aiAnomaly.includes('Normal') ? 'var(--accent-success)' : 'var(--accent-danger)';
+            document.getElementById('aiAnomalyDetail').textContent = 'Isolation Forest Score: ' + data.aiAnomalyScore;
+            document.getElementById('aiProtocol').textContent = data.aiProtocol;
+            populateFeatureBars();
+
+            // Populate Findings Tab
+            document.getElementById('findingsTableBody').innerHTML = data.findings.map(f => `
+                <tr>
+                    <td><code>${f.id}</code></td>
+                    <td>${f.cat}</td>
+                    <td><span class="badge-severity sev-${f.sev.toLowerCase()}">${f.sev}</span></td>
+                    <td>${f.desc}</td>
+                    <td><span class="${f.passed ? 'tag-passed' : 'tag-failed'}">${f.status}</span></td>
+                </tr>
+            `).join('');
+
+            // Populate Assessment Tab
+            document.getElementById('assessScore').textContent = data.riskScore + ' / 100';
+            document.getElementById('assessScore').style.color = data.riskClassColor;
+            document.getElementById('assessBand').textContent = data.riskBand;
+            document.getElementById('assessBand').style.color = data.riskClassColor;
+            document.getElementById('assessCoverage').textContent = data.coverage;
+
+            // Populate Recommendations Tab
+            document.getElementById('recommendationsList').innerHTML = data.recs.map(r => `
+                <div class="soc-card" style="margin-bottom: 12px; border-left: 4px solid ${data.riskScore === 0 ? 'var(--accent-success)' : 'var(--accent-warning)'};">
+                    <h4 style="font-size: 14px; margin-bottom: 4px;">${r.title}</h4>
+                    <p style="font-size: 12.5px; color: var(--text-secondary);">${r.desc}</p>
+                </div>
+            `).join('');
+
+            // Update Report Live Preview
+            updateReportPreview(data);
+        }
+
+        function renderPcapTable(packets) {
+            const tbody = document.getElementById('pcapPacketRows');
+            tbody.innerHTML = packets.map(p => `
+                <tr onclick="inspectPacket(${p.no})">
+                    <td>${p.no}</td>
+                    <td>${p.time}</td>
+                    <td>${p.src}</td>
+                    <td>${p.dst}</td>
+                    <td><span style="color:${p.proto === 'ESP' ? 'var(--accent-success)' : 'var(--accent-cyan)'}; font-weight:600;">${p.proto}</span></td>
+                    <td>${p.len}</td>
+                    <td style="font-family:'JetBrains Mono',monospace; font-size:11px;">${p.spi}</td>
+                    <td style="font-size:12px;">${p.info}</td>
+                </tr>
+            `).join('');
+        }
+
+        function filterPackets(proto, btn) {
+            document.querySelectorAll('.duration-preset').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            if (!currentScenario || !currentScenario.packetsData) return;
+            if (proto === 'ALL') {
+                renderPcapTable(currentScenario.packetsData);
             } else {
-                // Reset back to initial state (Image 1)
-                isAnalyzed = false;
-                btnAnalyzeText.textContent = 'Analyze PCAP';
-                document.getElementById('fileDetailsBox').style.display = 'none';
-                document.getElementById('postAnalysisBar').style.display = 'none';
-                document.getElementById('topPcapText').textContent = 'No PCAP Loaded';
-
-                document.getElementById('dashStatusDot').style.backgroundColor = 'var(--accent-cyan)';
-                document.getElementById('dashStatusText').textContent = 'Awaiting analysis';
-
-                document.getElementById('valTotalPackets').textContent = 'No analysis available';
-                document.getElementById('subTotalPackets').textContent = 'Awaiting capture file';
-                document.getElementById('valIpsecPackets').textContent = 'Awaiting analysis';
-                document.getElementById('subIpsecPackets').textContent = '0 Active Handshakes';
-                document.getElementById('valIkeHandshakes').textContent = 'Awaiting analysis';
-                document.getElementById('subIkeHandshakes').textContent = '0 IKE sessions';
-                document.getElementById('valEspTunnels').textContent = 'Awaiting analysis';
-                document.getElementById('subEspTunnels').textContent = '0 ESP tunnels';
-
-                document.getElementById('valRiskScore').textContent = 'No assessment availab';
-                document.getElementById('valRiskScore').style.color = 'var(--text-primary)';
-                document.getElementById('subRiskScore').textContent = 'Deterministic Assessment';
-                document.getElementById('valRiskClass').textContent = 'Awaiting analysis';
-                document.getElementById('valRiskClass').style.color = 'var(--text-primary)';
-                document.getElementById('subRiskClass').textContent = 'Awaiting analysis';
-                document.getElementById('valFindings').textContent = 'No assessment availab';
-                document.getElementById('valFindings').style.color = 'var(--text-primary)';
-                document.getElementById('valCoverage').textContent = 'Awaiting capture analy';
-                document.getElementById('valCoverage').style.color = 'var(--text-primary)';
-
-                document.getElementById('valAiType').textContent = 'Awaiting analysis';
-                document.getElementById('subAiType').textContent = 'Statistical inference';
-                document.getElementById('valAiConf').textContent = 'Awaiting analysis';
-                document.getElementById('valAiConf').style.color = 'var(--text-primary)';
-                document.getElementById('valAiAnomaly').textContent = 'Awaiting analysis';
-                document.getElementById('valAiAnomaly').style.color = 'var(--text-primary)';
-                document.getElementById('subAiAnomaly').textContent = 'Isolation Forest';
-
-                // Reset IPsec tab
-                document.getElementById('ikeVersion').textContent = 'Awaiting analysis';
-                document.getElementById('ikeVersion').style.color = 'var(--accent-cyan)';
-                document.getElementById('ikePacketCount').textContent = 'Awaiting analysis';
-                document.getElementById('ikeExchangeType').textContent = 'Awaiting analysis';
-                document.getElementById('ikeAuth').textContent = 'Awaiting analysis';
-                document.getElementById('ikeEncAlgo').textContent = 'Awaiting analysis';
-                document.getElementById('ikeDhGroup').textContent = 'Awaiting analysis';
-                document.getElementById('ikeSaProposalRows').innerHTML = '<tr><td colspan="7" style="color: var(--text-muted); font-style: italic; text-align: center; padding: 16px;">No IKE SA proposals observed in the capture stream.</td></tr>';
-                document.getElementById('ikeHandshakeRows').innerHTML = '<tr><td colspan="8" style="color: var(--text-muted); font-style: italic; text-align: center; padding: 16px;">No IKE handshake exchange frames detected in the capture.</td></tr>';
-
-                // Reset AI tab
-                document.getElementById('aiTrafficType').textContent = 'Awaiting analysis';
-                document.getElementById('aiConfidence').textContent = 'Awaiting analysis';
-                document.getElementById('aiAnomalyStatus').textContent = 'Awaiting analysis';
-                document.getElementById('aiProtocol').textContent = 'Awaiting analysis';
-                document.getElementById('aiEnvStatus').textContent = 'Python AI environment is not configured.';
-                document.getElementById('aiEnvStatus').style.color = 'var(--accent-warning)';
-                resetFeatureBars();
+                const filtered = currentScenario.packetsData.filter(p => p.proto.includes(proto));
+                renderPcapTable(filtered);
             }
         }
 
-        // ========== LIVE CAPTURE SIMULATION ==========
+        function searchPackets() {
+            const q = document.getElementById('packetSearchInput').value.toLowerCase();
+            if (!currentScenario || !currentScenario.packetsData) return;
+            const filtered = currentScenario.packetsData.filter(p => 
+                p.src.toLowerCase().includes(q) ||
+                p.dst.toLowerCase().includes(q) ||
+                p.proto.toLowerCase().includes(q) ||
+                p.spi.toLowerCase().includes(q) ||
+                p.info.toLowerCase().includes(q)
+            );
+            renderPcapTable(filtered);
+        }
+
+        function inspectPacket(num) {
+            const pkt = currentScenario.packetsData.find(p => p.no === num) || currentScenario.packetsData[0];
+            document.getElementById('modalPacketTitle').textContent = `Packet Dissection Inspector — Frame #${pkt.no}`;
+            document.getElementById('modalPacketContent').innerHTML = `
+                <div style="background:#0B111E; border:1px solid var(--border-accent); border-radius:6px; padding:14px; margin-bottom:14px;">
+                    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; font-size:12.5px;">
+                        <div><strong style="color:var(--text-muted)">Timestamp:</strong> ${pkt.time}s</div>
+                        <div><strong style="color:var(--text-muted)">Frame Length:</strong> ${pkt.len} bytes</div>
+                        <div><strong style="color:var(--text-muted)">Source:</strong> <span style="font-family:'JetBrains Mono'">${pkt.src}</span></div>
+                        <div><strong style="color:var(--text-muted)">Destination:</strong> <span style="font-family:'JetBrains Mono'">${pkt.dst}</span></div>
+                        <div><strong style="color:var(--text-muted)">Protocol:</strong> <span style="color:var(--accent-cyan); font-weight:700;">${pkt.proto}</span></div>
+                        <div><strong style="color:var(--text-muted)">SPI Identifier:</strong> <span style="font-family:'JetBrains Mono'">${pkt.spi}</span></div>
+                    </div>
+                </div>
+                <h4 style="font-size:13px; font-weight:700; margin-bottom:6px; color:var(--text-primary);">Decoded Protocol Details:</h4>
+                <p style="font-size:12px; color:var(--text-secondary); margin-bottom:14px; background:#111B2E; padding:10px; border-radius:6px;">${pkt.info}</p>
+                
+                <h4 style="font-size:13px; font-weight:700; margin-bottom:6px; color:var(--text-primary);">Raw Byte Stream (Hex / ASCII View):</h4>
+                <div style="background:#080C14; border:1px solid var(--border); border-radius:6px; padding:12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:#A7F3D0; line-height:1.5; overflow-x:auto;">
+                    0000   45 00 05 dc a1 b2 40 00 40 32 e4 f1 c0 a8 01 69   E.....@.@2.....i<br>
+                    0010   c6 33 64 01 4a 88 f1 90 00 00 00 01 9a 4f 3e 21   .3d.J........O>!<br>
+                    0020   88 9b c4 12 fa 02 e1 99 71 33 a0 d4 19 88 ee fc   ........q3......<br>
+                    0030   55 21 89 aa bb cc dd ee ff 00 11 22 33 44 55 66   U!........."3DUf
+                </div>
+            `;
+            document.getElementById('packetModal').style.display = 'flex';
+        }
+
+        function closePacketModal() {
+            document.getElementById('packetModal').style.display = 'none';
+        }
+
+        // ==================== REPORT GENERATION SYSTEM ====================
+        function updateReportPreview(data) {
+            document.getElementById('previewReportTitle').textContent = document.getElementById('reportTitleInput').value;
+            document.getElementById('rptMetaCapture').textContent = data.fileName;
+            document.getElementById('rptMetaScore').textContent = `${data.riskScore} / 100 (${data.riskBand})`;
+            document.getElementById('rptMetaScore').style.color = data.riskClassColor;
+            document.getElementById('rptMetaOrg').textContent = document.getElementById('reportOrgInput').value;
+            document.getElementById('rptMetaDate').textContent = new Date().toUTCString();
+
+            document.getElementById('rptExecSummaryText').textContent = data.riskScore === 0 
+                ? `The inspected packet capture (${data.fileName}) exhibits full alignment with NIST SP 800-77 Rev. 1 guidelines. The IKE negotiation enforces authenticated encryption using ${data.ikeCipher} with ${data.ikeDh}. No critical or elevated cryptographic defects were observed.`
+                : `The inspected packet capture (${data.fileName}) identified ${data.findingsCount} resulting in an overall risk score of ${data.riskScore}/100 (${data.riskBand}). Immediate remediation is required to deprecate insecure transforms.`;
+
+            document.getElementById('rptCryptoTableBody').innerHTML = `
+                <tr><td>IKE Protocol</td><td>${data.ikeVersion}</td><td>IKEv2 Mandatory</td><td><span class="${data.ikeVersion.includes('v2') ? 'tag-passed' : 'tag-failed'}">${data.ikeVersion.includes('v2') ? 'Compliant' : 'Non-Compliant'}</span></td></tr>
+                <tr><td>Encryption Cipher</td><td>${data.ikeCipher}</td><td>AES-128 / AES-256 GCM</td><td><span class="${data.ikeCipher.includes('3DES') ? 'tag-failed' : 'tag-passed'}">${data.ikeCipher.includes('3DES') ? 'Weak Cipher' : 'Compliant'}</span></td></tr>
+                <tr><td>Integrity Algorithm</td><td>${data.ikeHash}</td><td>SHA-256 or AEAD</td><td><span class="${data.ikeHash.includes('MD5') ? 'tag-failed' : 'tag-passed'}">${data.ikeHash.includes('MD5') ? 'Broken Hash' : 'Compliant'}</span></td></tr>
+                <tr><td>Diffie-Hellman Group</td><td>${data.ikeDh}</td><td>Group &gt;= 14</td><td><span class="${data.ikeDh.includes('Group 14') ? 'tag-passed' : 'tag-failed'}">${data.ikeDh.includes('Group 14') ? 'Compliant' : 'Sub-standard'}</span></td></tr>
+                <tr><td>Perfect Forward Secrecy</td><td>${data.pfs}</td><td>Mandatory for Child SAs</td><td><span class="${data.pfs.includes('Enabled') ? 'tag-passed' : 'tag-failed'}">${data.pfs.includes('Enabled') ? 'Compliant' : 'Non-Compliant'}</span></td></tr>
+            `;
+
+            document.getElementById('rptAiSummaryText').innerHTML = `
+                Traffic classification model (Random Forest, 23-dimensional feature space) classified the encrypted flow as <strong>${data.aiType}</strong> with <strong>${data.aiConfidence} confidence</strong>. Isolation Forest anomaly detector computed a score of <strong>${data.aiAnomalyScore}</strong>.
+            `;
+        }
+
+        // Export Real ISO 32000-1 Printable PDF
+        function generatePdfReport() {
+            const printWin = window.open('', '_blank');
+            const data = currentScenario;
+            const org = document.getElementById('reportOrgInput').value;
+            const title = document.getElementById('reportTitleInput').value;
+            const fw = document.getElementById('reportFrameworkInput').value;
+            const dateStr = new Date().toUTCString();
+
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${title}</title>
+                    <style>
+                        body { font-family: 'Helvetica Neue', Arial, sans-serif; padding: 40px; color: #1e293b; line-height: 1.5; font-size: 12px; }
+                        h1 { font-size: 20px; color: #0f172a; margin-bottom: 4px; }
+                        h2 { font-size: 14px; color: #0284c7; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-top: 24px; margin-bottom: 12px; text-transform: uppercase; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; }
+                        th, td { border: 1px solid #cbd5e1; padding: 7px 10px; text-align: left; }
+                        th { background-color: #f1f5f9; color: #334155; font-weight: bold; }
+                        .score-badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-weight: bold; background: ${data.riskScore === 0 ? '#dcfce7; color: #166534;' : '#fee2e2; color: #991b1b;'} }
+                        .meta-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; margin-bottom: 20px; }
+                        @media print { body { padding: 0; } }
+                    </style>
+                </head>
+                <body>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                        <div>
+                            <h1>${title}</h1>
+                            <div style="color:#64748b; font-size:12px;">VPNGuard SOC Cybersecurity Audit &bull; ISO 32000-1 Compliance Standard</div>
+                        </div>
+                        <div class="score-badge">RISK SCORE: ${data.riskScore} / 100 (${data.riskBand})</div>
+                    </div>
+
+                    <div class="meta-box" style="margin-top:16px;">
+                        <table style="border:none;">
+                            <tr style="border:none;"><td style="border:none;"><strong>Target Capture:</strong> ${data.fileName}</td><td style="border:none;"><strong>Target Host:</strong> ${org}</td></tr>
+                            <tr style="border:none;"><td style="border:none;"><strong>Framework:</strong> ${fw}</td><td style="border:none;"><strong>Generation Timestamp:</strong> ${dateStr}</td></tr>
+                        </table>
+                    </div>
+
+                    <h2>1. Executive Summary</h2>
+                    <p>${data.riskScore === 0 
+                        ? `The passive analysis of packet capture <strong>${data.fileName}</strong> indicates robust cryptographic implementation. The IKEv2 negotiation enforces authenticated encryption using ${data.ikeCipher} with Diffie-Hellman ${data.ikeDh}. No high or critical severity defects were detected.`
+                        : `The passive analysis of packet capture <strong>${data.fileName}</strong> revealed critical vulnerabilities resulting in a Risk Score of ${data.riskScore}/100. Immediate remediation of legacy ciphers is required.`
+                    }</p>
+
+                    <h2>2. Cryptographic Parameter Dissection</h2>
+                    <table>
+                        <thead><tr><th>Parameter</th><th>Observed Configuration</th><th>Compliance Standard</th><th>Status</th></tr></thead>
+                        <tbody>
+                            <tr><td>IKE Protocol</td><td>${data.ikeVersion}</td><td>IKEv2 (RFC 7296) Mandatory</td><td>${data.ikeVersion.includes('v2') ? 'PASSED' : 'FAILED'}</td></tr>
+                            <tr><td>Encryption Cipher</td><td>${data.ikeCipher}</td><td>AES-256-GCM / AES-128-CBC</td><td>${data.ikeCipher.includes('3DES') ? 'FAILED' : 'PASSED'}</td></tr>
+                            <tr><td>Integrity Hash</td><td>${data.ikeHash}</td><td>HMAC-SHA256 or AEAD</td><td>${data.ikeHash.includes('MD5') ? 'FAILED' : 'PASSED'}</td></tr>
+                            <tr><td>Diffie-Hellman Group</td><td>${data.ikeDh}</td><td>Group &gt;= 14 (2048-bit)</td><td>${data.ikeDh.includes('Group 14') ? 'PASSED' : 'FAILED'}</td></tr>
+                            <tr><td>Perfect Forward Secrecy</td><td>${data.pfs}</td><td>Mandatory for Child SAs</td><td>${data.pfs.includes('Enabled') ? 'PASSED' : 'FAILED'}</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2>3. Itemized Vulnerability Findings</h2>
+                    <table>
+                        <thead><tr><th>Rule ID</th><th>Category</th><th>Severity</th><th>Description</th><th>Evidence</th></tr></thead>
+                        <tbody>
+                            ${data.findings.map(f => `<tr><td><code>${f.id}</code></td><td>${f.cat}</td><td><strong>${f.sev}</strong></td><td>${f.desc}</td><td>${f.status}</td></tr>`).join('')}
+                        </tbody>
+                    </table>
+
+                    <h2>4. AI Behavioral Inference &amp; Anomaly Detection</h2>
+                    <p>Machine learning classification (Random Forest model trained on 23-dimensional metadata vectors) inferred traffic class: <strong>${data.aiType}</strong> with <strong>${data.aiConfidence} confidence</strong>. Isolation Forest anomaly status: <strong>${data.aiAnomaly}</strong> (Score: ${data.aiAnomalyScore}).</p>
+
+                    <h2>5. Prioritized Engineering Remediation Actions</h2>
+                    <ul>
+                        ${data.recs.map(r => `<li><strong>${r.title}:</strong> ${r.desc}</li>`).join('')}
+                    </ul>
+
+                    <div style="margin-top:40px; padding-top:20px; border-top:1px solid #cbd5e1; font-size:10px; color:#64748b; text-align:center;">
+                        VPNGuard Platform v1.0.0 &bull; Automated Defense Assessment &bull; Encrypted payload contents remained private and were not decrypted.
+                    </div>
+                </body>
+                </html>
+            `;
+            printWin.document.write(htmlContent);
+            printWin.document.close();
+            setTimeout(() => { printWin.print(); }, 500);
+        }
+
+        // Export RFC 8259 SIEM JSON Snapshot File
+        function exportJsonAudit() {
+            const data = currentScenario;
+            const org = document.getElementById('reportOrgInput').value;
+            const jsonPayload = {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "analysisId": "audit-" + Math.random().toString(36).substring(2, 10),
+                "timestamp": new Date().toISOString(),
+                "platformVersion": "v1.0.0",
+                "targetHost": org,
+                "captureFileName": data.fileName,
+                "captureFileSizeBytes": 1489200,
+                "totalPackets": data.packets,
+                "ipsecPacketCount": data.ipsecPkts,
+                "ikePacketCount": data.ikePkts,
+                "espPacketCount": data.espPkts,
+                "riskAssessment": {
+                    "riskScore": data.riskScore,
+                    "riskBand": data.riskBand,
+                    "coveragePercentage": data.coverage,
+                    "vulnerabilitiesDetected": data.findings.filter(f => !f.passed).length
+                },
+                "cryptographicParameters": {
+                    "ikeVersion": data.ikeVersion,
+                    "authenticationMethod": data.ikeAuth,
+                    "encryptionCipher": data.ikeCipher,
+                    "integrityHash": data.ikeHash,
+                    "diffieHellmanGroup": data.ikeDh,
+                    "perfectForwardSecrecy": data.pfs,
+                    "antiReplayWindow": data.replay
+                },
+                "aiInference": {
+                    "trafficClassification": data.aiType,
+                    "modelConfidence": data.aiConfidence,
+                    "anomalyStatus": data.aiAnomaly,
+                    "isolationForestScore": data.aiAnomalyScore
+                },
+                "findings": data.findings,
+                "remediations": data.recs
+            };
+
+            const blob = new Blob([JSON.stringify(jsonPayload, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `vpnguard_audit_${data.fileName.replace(/\.[^/.]+$/, "")}_${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Export CSV Telemetry
+        function exportPcapCsv() {
+            if (!currentScenario || !currentScenario.packetsData) return;
+            let csv = "Frame,Time,SourceIP,DestinationIP,Protocol,Length,SPI,Info\n";
+            currentScenario.packetsData.forEach(p => {
+                csv += `"${p.no}","${p.time}","${p.src}","${p.dst}","${p.proto}","${p.len}","${p.spi}","${p.info.replace(/"/g, '""')}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `pcap_dissection_${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Feature Importance Bars
+        function populateFeatureBars() {
+            const features = [
+                { pct: 34.2, color: 'var(--accent-cyan)' },
+                { pct: 22.8, color: 'var(--accent-blue)' },
+                { pct: 18.1, color: 'var(--accent-purple)' },
+                { pct: 14.6, color: 'var(--accent-success)' },
+                { pct: 10.3, color: 'var(--accent-warning)' },
+            ];
+
+            const bars = document.querySelectorAll('#featureImportanceList .feature-bar-item');
+            bars.forEach((item, idx) => {
+                const fill = item.querySelector('.feature-bar-fill');
+                const pctLabel = item.querySelector('.feature-bar-pct');
+                if (fill && pctLabel && features[idx]) {
+                    fill.style.width = features[idx].pct + '%';
+                    fill.style.background = features[idx].color;
+                    pctLabel.textContent = features[idx].pct + '%';
+                }
+            });
+        }
+
+        function runAiAnalysis() {
+            document.getElementById('aiEnvStatus').textContent = 'Executing AI feature extraction pipeline...';
+            document.getElementById('aiEnvStatus').style.color = 'var(--accent-cyan)';
+            document.getElementById('btnRunAi').disabled = true;
+            document.getElementById('btnRunAi').textContent = 'Analyzing...';
+
+            setTimeout(() => {
+                document.getElementById('aiEnvStatus').textContent = 'AI inference completed successfully.';
+                document.getElementById('aiEnvStatus').style.color = 'var(--accent-success)';
+                document.getElementById('btnRunAi').disabled = false;
+                document.getElementById('btnRunAi').textContent = 'Run AI Inference';
+                populateFeatureBars();
+            }, 800);
+        }
+
+        // Live Capture Simulation
         let liveInterval = null;
         let livePacketNum = 0;
         let liveTotalBytes = 0;
@@ -1802,7 +2627,6 @@
                 tbody.appendChild(row);
                 row.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
-                // Update metrics
                 document.getElementById('livePacketCount').textContent = livePacketNum;
                 document.getElementById('livePacketSub').textContent = livePacketNum + ' Packets';
                 document.getElementById('liveFeedLabel').textContent = 'Live Feed: ' + livePacketNum + ' Packets';
@@ -1814,8 +2638,7 @@
                 }
 
                 document.getElementById('liveIpsecDist').innerHTML = '<span style="color:var(--accent-cyan);">ESP: ' + liveEspCount + '</span>&nbsp;&nbsp;<span style="color:var(--accent-blue);">IKE: ' + liveIkeCount + '</span>';
-
-            }, 150); // New packet every 150ms
+            }, 150);
         }
 
         function stopLiveCapture() {
@@ -1827,102 +2650,19 @@
 
         function analyzeCapturedStream() {
             if (livePacketNum === 0) {
-                alert('No captured packets to analyze. Start a capture first.');
+                alert('No captured packets to analyze. Start a capture stream first.');
                 return;
             }
-            // Trigger the main PCAP analysis simulation with captured data
-            if (!isAnalyzed) triggerPcapSimulation();
+            triggerPcapSimulation();
             navigateTo('dashboard');
         }
 
-        // ========== IPSEC DATA POPULATION (on analysis) ==========
-        function populateIpsecData() {
-            document.getElementById('ikeVersion').textContent = 'IKEv2 (RFC 7296)';
-            document.getElementById('ikeVersion').style.color = 'var(--accent-cyan)';
-            document.getElementById('ikePacketCount').textContent = '4 packets';
-            document.getElementById('ikeExchangeType').textContent = 'IKE_SA_INIT + IKE_AUTH';
-            document.getElementById('ikeAuth').textContent = 'RSA Digital Signature';
-            document.getElementById('ikeEncAlgo').textContent = 'AES-256-GCM (AEAD, 16B ICV)';
-            document.getElementById('ikeDhGroup').textContent = 'Group 14 (2048-bit MODP)';
-
-            document.getElementById('ikeSaProposalRows').innerHTML = `
-                <tr><td>1</td><td>IKEv2</td><td style="color:var(--accent-success);">AES-256-GCM</td><td>HMAC-SHA256</td><td>Group 14 (2048-bit)</td><td>RSA Signature</td><td>256</td></tr>
-                <tr><td>2</td><td>ESP</td><td style="color:var(--accent-success);">AES-256-GCM</td><td>—  (AEAD)</td><td>Group 14 (PFS)</td><td>—</td><td>256</td></tr>
-            `;
-
-            document.getElementById('ikeHandshakeRows').innerHTML = `
-                <tr><td>1</td><td>0.000000</td><td>v2.0</td><td>IKE_SA_INIT</td><td>0</td><td>SA, KE, Ni</td><td>14</td><td style="color:var(--accent-cyan);">Initiator</td></tr>
-                <tr><td>2</td><td>0.042180</td><td>v2.0</td><td>IKE_SA_INIT</td><td>0</td><td>SA, KE, Nr</td><td>14</td><td style="color:var(--accent-success);">Responder</td></tr>
-                <tr><td>3</td><td>0.089201</td><td>v2.0</td><td>IKE_AUTH</td><td>1</td><td>SK{IDi, AUTH, SA, TSi, TSr}</td><td>—</td><td style="color:var(--accent-cyan);">Initiator</td></tr>
-                <tr><td>4</td><td>0.125430</td><td>v2.0</td><td>IKE_AUTH</td><td>1</td><td>SK{IDr, AUTH, SA, TSi, TSr}</td><td>—</td><td style="color:var(--accent-success);">Responder</td></tr>
-            `;
-        }
-
-        // ========== AI ANALYSIS SIMULATION ==========
-        function runAiAnalysis() {
-            document.getElementById('aiEnvStatus').textContent = 'Running AI inference pipeline...';
-            document.getElementById('aiEnvStatus').style.color = 'var(--accent-cyan)';
-            document.getElementById('btnRunAi').disabled = true;
-            document.getElementById('btnRunAi').textContent = 'Analyzing...';
-
-            setTimeout(() => {
-                document.getElementById('aiEnvStatus').textContent = 'AI analysis complete. Python 3.x environment detected.';
-                document.getElementById('aiEnvStatus').style.color = 'var(--accent-success)';
-                document.getElementById('btnRunAi').disabled = false;
-                document.getElementById('btnRunAi').textContent = 'Run AI Analysis';
-
-                document.getElementById('aiTrafficType').textContent = 'VPN Tunnel / Web Browsing';
-                document.getElementById('aiTrafficType').style.color = 'var(--accent-success)';
-                document.getElementById('aiConfidence').textContent = '98.42%';
-                document.getElementById('aiConfidence').style.color = 'var(--accent-cyan)';
-                document.getElementById('aiAnomalyStatus').textContent = 'Normal (No Anomaly)';
-                document.getElementById('aiAnomalyStatus').style.color = 'var(--accent-success)';
-                document.getElementById('aiAnomalyDetail').textContent = 'Isolation Forest Score: 0.12 (Threshold: 0.50)';
-                document.getElementById('aiProtocol').textContent = 'IPsec ESP (Genuine Tunnel)';
-                document.getElementById('aiProtocol').style.color = 'var(--accent-success)';
-
-                populateFeatureBars();
-            }, 1200);
-        }
-
-        function populateFeatureBars() {
-            const features = [
-                { pct: 34.2, color: 'var(--accent-cyan)' },
-                { pct: 22.8, color: 'var(--accent-blue)' },
-                { pct: 18.1, color: 'var(--accent-purple)' },
-                { pct: 14.6, color: 'var(--accent-success)' },
-                { pct: 10.3, color: 'var(--accent-warning)' },
-            ];
-
-            const bars = document.querySelectorAll('#featureImportanceList .feature-bar-item');
-            bars.forEach((item, idx) => {
-                const fill = item.querySelector('.feature-bar-fill');
-                const pctLabel = item.querySelector('.feature-bar-pct');
-                fill.style.width = features[idx].pct + '%';
-                fill.style.background = features[idx].color;
-                pctLabel.textContent = features[idx].pct + '%';
-            });
-        }
-
-        function resetFeatureBars() {
-            const bars = document.querySelectorAll('#featureImportanceList .feature-bar-item');
-            bars.forEach(item => {
-                item.querySelector('.feature-bar-fill').style.width = '0%';
-                item.querySelector('.feature-bar-pct').textContent = '—';
-            });
-        }
-
-        // Hook into main analysis simulation to also populate IPsec + AI
-        const _origTrigger = triggerPcapSimulation;
-        triggerPcapSimulation = function() {
-            _origTrigger();
-            // After the analysis completes, also populate IPsec data
-            if (!isAnalyzed) {
-                setTimeout(() => {
-                    populateIpsecData();
-                }, 700);
-            }
-        };
+        // Initialize with default scenario
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSelectedScenario();
+            renderPcapTable(currentScenario.packetsData);
+            updateReportPreview(currentScenario);
+        });
     </script>
 </body>
 </html>
