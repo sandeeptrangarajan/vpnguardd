@@ -672,6 +672,93 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* IKE Info Key-Value Rows */
+        .ike-info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .ike-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .ike-info-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .ike-info-value {
+            font-size: 13px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Duration Preset Buttons */
+        .duration-preset {
+            background: var(--bg-input);
+            border: 1px solid var(--border-accent);
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .duration-preset:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-primary);
+        }
+
+        .duration-preset.active {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* Feature Importance Bars */
+        .feature-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .feature-bar-label {
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            min-width: 180px;
+            font-weight: 500;
+        }
+
+        .feature-bar-track {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .feature-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .feature-bar-pct {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            min-width: 40px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -1029,65 +1116,306 @@
                 </div>
             </section>
 
-            <!-- VIEW 3: LIVE CAPTURE -->
+            <!-- VIEW 3: LIVE CAPTURE (Matches Desktop WPF Screenshot) -->
             <section class="view-panel" id="view-live">
                 <div class="section-header-row">
                     <div>
-                        <h2 class="section-header-title">Live Capture &amp; Streaming</h2>
-                        <p class="section-header-subtitle">Stream real-time packet telemetry from local network adapters using non-invasive TShark capture drivers.</p>
+                        <h2 class="section-header-title">Live Capture &amp; Stream Analyzer</h2>
+                        <p class="section-header-subtitle">Capture, stream, dissect, and evaluate live network interface traffic and IPsec VPN tunnels in real time.</p>
                     </div>
-                    <span class="status-pill"><span class="pill-dot"></span>Adapter: Ethernet (Intel I219-LM)</span>
+                    <span class="status-pill" style="border-color: var(--accent-success);"><span class="pill-dot" style="background: var(--accent-success);"></span>CAPTURE ENGINE READY</span>
                 </div>
-                <div class="data-table-container">
-                    <table class="soc-table">
-                        <thead>
-                            <tr>
-                                <th>Frame</th>
-                                <th>Timestamp</th>
-                                <th>Interface</th>
-                                <th>EtherType</th>
-                                <th>Payload Size</th>
-                                <th>Traffic Classification</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1042</td><td>17:35:01.204</td><td>eth0</td><td>IPv4 (0x0800)</td><td>1280 bytes</td><td><span class="tag-passed">IPsec Encapsulated (ESP)</span></td></tr>
-                            <tr><td>1043</td><td>17:35:01.218</td><td>eth0</td><td>IPv4 (0x0800)</td><td>1280 bytes</td><td><span class="tag-passed">IPsec Encapsulated (ESP)</span></td></tr>
-                            <tr><td>1044</td><td>17:35:01.235</td><td>eth0</td><td>IPv4 (0x0800)</td><td>84 bytes</td><td>IKE Keepalive / DPD</td></tr>
-                        </tbody>
-                    </table>
+
+                <!-- Live Stream Configuration -->
+                <div class="soc-card" style="margin-bottom: 18px; padding: 20px 24px;">
+                    <h3 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">Live Stream Configuration</h3>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 14px; flex-wrap: wrap;">
+                        <label style="font-size: 13px; color: var(--text-secondary); min-width: 170px;">Network Interface / Stream:</label>
+                        <select id="liveInterfaceSelect" style="flex: 1; min-width: 300px; background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 8px 12px; border-radius: 6px; font-size: 12.5px; font-family: 'JetBrains Mono', monospace;">
+                            <option>[Testbed Stream] strongSwan IPsec (IKEv2 + AES-256-GCM + DH-19)</option>
+                            <option>Ethernet (Intel I219-LM) — 192.168.1.105</option>
+                            <option>Wi-Fi (Intel AX211) — 192.168.1.112</option>
+                            <option>Loopback (lo0) — 127.0.0.1</option>
+                        </select>
+                        <button class="btn-secondary" style="padding: 7px 14px; font-size: 12px;" onclick="refreshLiveInterfaces()">
+                            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                            Refresh
+                        </button>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap;">
+                        <label style="font-size: 13px; color: var(--text-secondary); min-width: 170px;">Duration (seconds):</label>
+                        <input type="number" id="liveDuration" value="30" min="5" max="300" style="width: 70px; background: var(--bg-input); border: 1px solid var(--border-accent); color: var(--text-primary); padding: 8px 10px; border-radius: 6px; font-size: 13px; text-align: center; font-family: 'JetBrains Mono', monospace;">
+                        <button class="duration-preset active" onclick="setDuration(10, this)">10s</button>
+                        <button class="duration-preset" onclick="setDuration(30, this)">30s</button>
+                        <button class="duration-preset" onclick="setDuration(60, this)">60s</button>
+                        <button class="duration-preset" onclick="setDuration(120, this)">120s</button>
+                    </div>
+                    <!-- Action Buttons Row -->
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn-primary" id="btnStartCapture" onclick="startLiveCapture()" style="font-size: 12.5px; padding: 8px 18px;">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#fff;"><path d="M8 5v14l11-7z"/></svg>
+                            Start Capture
+                        </button>
+                        <button class="btn-secondary" id="btnStopCapture" onclick="stopLiveCapture()" style="font-size: 12.5px; padding: 8px 18px; color: var(--accent-danger); border-color: rgba(239,68,68,0.4);">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--accent-danger);"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                            Stop Capture
+                        </button>
+                        <button class="btn-secondary" onclick="analyzeCapturedStream()" style="font-size: 12.5px; padding: 8px 18px;">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--accent-cyan);"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                            Analyze Captured Stream
+                        </button>
+                        <button class="btn-secondary" onclick="alert('Exporting captured stream to PCAP file...')" style="font-size: 12.5px; padding: 8px 18px;">
+                            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                            Export PCAP
+                        </button>
+                        <button class="btn-secondary" onclick="refreshLiveInterfaces()" style="font-size: 12.5px; padding: 8px 18px;">
+                            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Capture Metrics Cards -->
+                <div class="cards-grid" style="margin-bottom: 18px;">
+                    <div class="soc-card">
+                        <div class="card-top"><span class="card-label">Packets Streamed</span></div>
+                        <div class="card-value highlight-score" style="color: var(--accent-cyan);" id="livePacketCount">0</div>
+                        <div class="card-subtext" id="livePacketSub">0 Packets</div>
+                    </div>
+                    <div class="soc-card">
+                        <div class="card-top"><span class="card-label">Data Volume</span></div>
+                        <div class="card-value highlight-score" id="liveDataVol">0 B</div>
+                        <div class="card-subtext">Stream throughput</div>
+                    </div>
+                    <div class="soc-card">
+                        <div class="card-top"><span class="card-label">IPsec Distribution</span></div>
+                        <div class="card-value" id="liveIpsecDist"><span style="color: var(--accent-cyan);">ESP: 0</span>&nbsp;&nbsp;<span style="color: var(--accent-blue);">IKE: 0</span></div>
+                        <div class="card-subtext">Encrypted Tunnel vs Handshake</div>
+                    </div>
+                    <div class="soc-card">
+                        <div class="card-top"><span class="card-label">Capture Engine Telemetry</span></div>
+                        <div class="card-value" style="font-size: 13px; color: var(--accent-success);" id="liveEngineStatus">Engine ready. Select an interface or virtual testbed stream to begin.</div>
+                        <div class="card-subtext" id="liveEngineSub"></div>
+                    </div>
+                </div>
+
+                <!-- Real-Time Packet Stream Inspection -->
+                <div class="soc-card" style="padding: 0; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border);">
+                        <h3 style="font-size: 14.5px; font-weight: 700;">Real-Time Packet Stream Inspection</h3>
+                        <span style="font-size: 12px; color: var(--accent-cyan); font-weight: 600;" id="liveFeedLabel">Live Feed: 0 Packets</span>
+                    </div>
+                    <div style="max-height: 320px; overflow-y: auto;">
+                        <table class="soc-table">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Time</th>
+                                    <th>Source</th>
+                                    <th>Destination</th>
+                                    <th>Protocol</th>
+                                    <th>Length</th>
+                                    <th>SPI</th>
+                                    <th>Info</th>
+                                </tr>
+                            </thead>
+                            <tbody id="livePacketTableBody">
+                                <!-- Populated by live capture simulation -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
-            <!-- VIEW 4: IPSEC ANALYSIS -->
+            <!-- VIEW 4: IPSEC ANALYSIS (Matches Desktop WPF Screenshot) -->
             <section class="view-panel" id="view-ipsec">
                 <div class="section-header-row">
                     <div>
-                        <h2 class="section-header-title">IPsec &amp; IKE Deep Dissection</h2>
-                        <p class="section-header-subtitle">Complete structural parameter evaluation of IKE proposals, Phase 1/Phase 2 Child SAs, and Anti-Replay status.</p>
+                        <h2 class="section-header-title">IPsec Protocol &amp; Handshake Analysis</h2>
+                        <p class="section-header-subtitle">Phase 3 deep dissection: IKEv1/v2 Security Association proposals, Diffie-Hellman exchanges, Nonces, and ESP SPI sequence tracking.</p>
                     </div>
                 </div>
-                <div class="cards-grid">
-                    <div class="soc-card"><span class="card-label">IKE Version</span><div class="card-value">IKEv2 (RFC 7296)</div><div class="card-subtext">Main Mode Handshake</div></div>
-                    <div class="soc-card"><span class="card-label">Negotiated Cipher</span><div class="card-value" style="color: var(--accent-success);">AES-256-GCM</div><div class="card-subtext">Authenticated AEAD</div></div>
-                    <div class="soc-card"><span class="card-label">Diffie-Hellman</span><div class="card-value" style="color: var(--accent-success);">Group 14 (2048-bit)</div><div class="card-subtext">Compliant MODP</div></div>
-                    <div class="soc-card"><span class="card-label">PFS Status</span><div class="card-value" style="color: var(--accent-success);">Enabled (Group 14)</div><div class="card-subtext">Perfect Forward Secrecy</div></div>
+
+                <!-- IKE Information (Internet Key Exchange) -->
+                <div class="soc-card" style="margin-bottom: 18px; padding: 0; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border);">
+                        <h3 style="font-size: 14.5px; font-weight: 700;">IKE Information (Internet Key Exchange)</h3>
+                        <span class="card-icon icon-cyan"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg></span>
+                    </div>
+                    <div style="padding: 4px 0;">
+                        <div class="ike-info-row"><span class="ike-info-label">IKE Version</span><span class="ike-info-value" id="ikeVersion" style="color: var(--accent-cyan);">Awaiting analysis</span></div>
+                        <div class="ike-info-row"><span class="ike-info-label">IKE Packet Count</span><span class="ike-info-value" id="ikePacketCount">Awaiting analysis</span></div>
+                        <div class="ike-info-row"><span class="ike-info-label">Exchange Type</span><span class="ike-info-value" id="ikeExchangeType">Awaiting analysis</span></div>
+                        <div class="ike-info-row"><span class="ike-info-label">Authentication</span><span class="ike-info-value" id="ikeAuth">Awaiting analysis</span></div>
+                        <div class="ike-info-row"><span class="ike-info-label">Encryption Algorithm</span><span class="ike-info-value" id="ikeEncAlgo">Awaiting analysis</span></div>
+                        <div class="ike-info-row"><span class="ike-info-label">Diffie-Hellman Group</span><span class="ike-info-value" id="ikeDhGroup">Awaiting analysis</span></div>
+                    </div>
+                </div>
+
+                <!-- Observed IKE SA Proposals & Cryptographic Transforms -->
+                <div class="soc-card" style="margin-bottom: 18px; padding: 0; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border);">
+                        <h3 style="font-size: 14.5px; font-weight: 700;">Observed IKE SA Proposals &amp; Cryptographic Transforms</h3>
+                        <span class="card-icon icon-blue"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></span>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="soc-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Protocol</th>
+                                    <th>Encryption</th>
+                                    <th>Integrity / Hash</th>
+                                    <th>Diffie-Hellman</th>
+                                    <th>Auth Method</th>
+                                    <th>Key Len</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ikeSaProposalRows">
+                                <tr><td colspan="7" style="color: var(--text-muted); font-style: italic; text-align: center; padding: 16px;">No IKE SA proposals observed in the capture stream.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- IKE Handshake & Exchange Messages (Dissected Timeline) -->
+                <div class="soc-card" style="padding: 0; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border);">
+                        <h3 style="font-size: 14.5px; font-weight: 700;">IKE Handshake &amp; Exchange Messages (Dissected Timeline)</h3>
+                        <span class="card-icon icon-success"><svg viewBox="0 0 24 24" style="width:16px;height:16px;"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></span>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="soc-table">
+                            <thead>
+                                <tr>
+                                    <th>Frame</th>
+                                    <th>Timestamp</th>
+                                    <th>Version</th>
+                                    <th>Exchange Type</th>
+                                    <th>Msg ID</th>
+                                    <th>Payloads</th>
+                                    <th>DH Group</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ikeHandshakeRows">
+                                <tr><td colspan="8" style="color: var(--text-muted); font-style: italic; text-align: center; padding: 16px;">No IKE handshake exchange frames detected in the capture.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
-            <!-- VIEW 5: AI ANALYSIS -->
+            <!-- VIEW 5: AI ANALYSIS (Matches Desktop WPF Screenshot) -->
             <section class="view-panel" id="view-ai">
                 <div class="section-header-row">
                     <div>
-                        <h2 class="section-header-title">AI Traffic Classification &amp; Behavioral Anomaly Engine</h2>
-                        <p class="section-header-subtitle">Machine learning inferences derived from packet sizing distributions, inter-arrival entropy, and burst patterns.</p>
+                        <h2 class="section-header-title">AI Traffic Classification &amp; Anomaly Detection</h2>
+                        <p class="section-header-subtitle">Phase 5 — Machine learning classification, behavioral anomaly detection, and explainable AI inference.</p>
                     </div>
                 </div>
-                <div class="cards-grid">
-                    <div class="soc-card"><span class="card-label">Predicted Traffic</span><div class="card-value">VPN Tunnel / Web Browsing</div><div class="card-subtext">Random Forest Ensemble</div></div>
-                    <div class="soc-card"><span class="card-label">Confidence Score</span><div class="card-value" style="color: var(--accent-cyan);">98.42%</div><div class="card-subtext">23 Features Analyzed</div></div>
-                    <div class="soc-card"><span class="card-label">Isolation Anomaly</span><div class="card-value" style="color: var(--accent-success);">Normal / Non-Anomalous</div><div class="card-subtext">Score: 0.12 (Threshold: 0.50)</div></div>
-                    <div class="soc-card"><span class="card-label">Entropy Metric</span><div class="card-value">7.84 bits/byte</div><div class="card-subtext">High Encrypted Payload</div></div>
+
+                <!-- AI Warning Banner & Run Button -->
+                <div class="soc-card" style="margin-bottom: 18px; padding: 18px 22px; border-left: 4px solid var(--accent-warning);">
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 280px;">
+                            <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Analyze a PCAP to generate AI results.</h4>
+                            <p style="font-size: 12.5px; color: var(--accent-warning); font-weight: 600; margin-bottom: 6px;" id="aiEnvStatus">Python AI environment is not configured.</p>
+                            <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">The AI engine uses a trained Random Forest classifier and Isolation Forest anomaly detector to classify encrypted IPsec traffic patterns using only metadata (no payload inspection).</p>
+                        </div>
+                        <button class="btn-primary" id="btnRunAi" onclick="runAiAnalysis()" style="white-space: nowrap; align-self: flex-start;">
+                            Run AI Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Inference Cards (2x2 Grid) -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 18px;">
+                    <!-- AI-Inferred Traffic Type -->
+                    <div class="soc-card">
+                        <div class="card-top">
+                            <span class="card-label">AI-Inferred Traffic Type</span>
+                        </div>
+                        <div style="margin-top: 4px;">
+                            <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 4px;">Classification:</div>
+                            <div class="card-value" id="aiTrafficType" style="font-size: 15px;">Awaiting analysis</div>
+                        </div>
+                        <div class="card-subtext" style="margin-top: 8px; font-size: 11.5px; line-height: 1.4; color: var(--text-muted);">Traffic type inferred from packet size distribution, timing, and directional metadata.</div>
+                    </div>
+
+                    <!-- AI Confidence -->
+                    <div class="soc-card">
+                        <div class="card-top">
+                            <span class="card-label">AI Confidence</span>
+                        </div>
+                        <div style="margin-top: 4px;">
+                            <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 4px;">Model Inference Confidence:</div>
+                            <div class="card-value" id="aiConfidence" style="font-size: 15px;">Awaiting analysis</div>
+                        </div>
+                        <div class="card-subtext" style="margin-top: 8px; font-size: 11.5px; line-height: 1.4; color: var(--text-muted);">Statistical certainty computed from multi-dimensional feature distributions.</div>
+                    </div>
+
+                    <!-- Anomaly Detection -->
+                    <div class="soc-card">
+                        <div class="card-top">
+                            <span class="card-label">Anomaly Detection</span>
+                        </div>
+                        <div style="margin-top: 4px;">
+                            <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 4px;">Status:</div>
+                            <div class="card-value" id="aiAnomalyStatus" style="font-size: 15px;">Awaiting analysis</div>
+                            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;" id="aiAnomalyDetail">No anomalies detected.</div>
+                        </div>
+                        <div class="card-subtext" style="margin-top: 8px; font-size: 11.5px; line-height: 1.4; color: var(--text-muted);">Uses Isolation Forest to flag potentially unusual traffic patterns in encrypted flows.</div>
+                    </div>
+
+                    <!-- AI-Inferred Protocol -->
+                    <div class="soc-card">
+                        <div class="card-top">
+                            <span class="card-label">AI-Inferred Protocol</span>
+                        </div>
+                        <div style="margin-top: 4px;">
+                            <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 4px;">Predicted Protocol:</div>
+                            <div class="card-value" id="aiProtocol" style="font-size: 15px;">Awaiting analysis</div>
+                        </div>
+                        <div class="card-subtext" style="margin-top: 8px; font-size: 11.5px; line-height: 1.4; color: var(--text-muted);">Decodes transport signatures to distinguish genuine IPsec ESP from obfuscated proxies.</div>
+                    </div>
+                </div>
+
+                <!-- Feature Importance (Explainability) -->
+                <div class="soc-card" style="padding: 0; overflow: hidden;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--border);">
+                        <h3 style="font-size: 14.5px; font-weight: 700;">Feature Importance (Explainability)</h3>
+                    </div>
+                    <div style="padding: 16px 18px;">
+                        <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 14px;">Top features contributing to the AI model's classification decision:</p>
+                        <div id="featureImportanceList">
+                            <div class="feature-bar-item">
+                                <div class="feature-bar-label">avg_packet_size</div>
+                                <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 0%; background: var(--accent-cyan);"></div></div>
+                                <span class="feature-bar-pct">—</span>
+                            </div>
+                            <div class="feature-bar-item">
+                                <div class="feature-bar-label">forward_reverse_ratio</div>
+                                <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 0%; background: var(--accent-blue);"></div></div>
+                                <span class="feature-bar-pct">—</span>
+                            </div>
+                            <div class="feature-bar-item">
+                                <div class="feature-bar-label">avg_inter_arrival_time</div>
+                                <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 0%; background: var(--accent-purple);"></div></div>
+                                <span class="feature-bar-pct">—</span>
+                            </div>
+                            <div class="feature-bar-item">
+                                <div class="feature-bar-label">esp_packet_ratio</div>
+                                <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 0%; background: var(--accent-success);"></div></div>
+                                <span class="feature-bar-pct">—</span>
+                            </div>
+                            <div class="feature-bar-item">
+                                <div class="feature-bar-label">payload_entropy</div>
+                                <div class="feature-bar-track"><div class="feature-bar-fill" style="width: 0%; background: var(--accent-warning);"></div></div>
+                                <span class="feature-bar-pct">—</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1386,8 +1714,215 @@
                 document.getElementById('valAiAnomaly').textContent = 'Awaiting analysis';
                 document.getElementById('valAiAnomaly').style.color = 'var(--text-primary)';
                 document.getElementById('subAiAnomaly').textContent = 'Isolation Forest';
+
+                // Reset IPsec tab
+                document.getElementById('ikeVersion').textContent = 'Awaiting analysis';
+                document.getElementById('ikeVersion').style.color = 'var(--accent-cyan)';
+                document.getElementById('ikePacketCount').textContent = 'Awaiting analysis';
+                document.getElementById('ikeExchangeType').textContent = 'Awaiting analysis';
+                document.getElementById('ikeAuth').textContent = 'Awaiting analysis';
+                document.getElementById('ikeEncAlgo').textContent = 'Awaiting analysis';
+                document.getElementById('ikeDhGroup').textContent = 'Awaiting analysis';
+                document.getElementById('ikeSaProposalRows').innerHTML = '<tr><td colspan="7" style="color: var(--text-muted); font-style: italic; text-align: center; padding: 16px;">No IKE SA proposals observed in the capture stream.</td></tr>';
+                document.getElementById('ikeHandshakeRows').innerHTML = '<tr><td colspan="8" style="color: var(--text-muted); font-style: italic; text-align: center; padding: 16px;">No IKE handshake exchange frames detected in the capture.</td></tr>';
+
+                // Reset AI tab
+                document.getElementById('aiTrafficType').textContent = 'Awaiting analysis';
+                document.getElementById('aiConfidence').textContent = 'Awaiting analysis';
+                document.getElementById('aiAnomalyStatus').textContent = 'Awaiting analysis';
+                document.getElementById('aiProtocol').textContent = 'Awaiting analysis';
+                document.getElementById('aiEnvStatus').textContent = 'Python AI environment is not configured.';
+                document.getElementById('aiEnvStatus').style.color = 'var(--accent-warning)';
+                resetFeatureBars();
             }
         }
+
+        // ========== LIVE CAPTURE SIMULATION ==========
+        let liveInterval = null;
+        let livePacketNum = 0;
+        let liveTotalBytes = 0;
+        let liveEspCount = 0;
+        let liveIkeCount = 0;
+        let isCapturing = false;
+
+        const livePacketTemplates = [
+            { proto: 'ESP', src: '192.168.1.105', dst: '198.51.100.1', lenRange: [1200, 1420], spi: '0x4a88f190', info: 'ESP Seq={seq}, SPI=0x4a88f190, AES-256-GCM encrypted' },
+            { proto: 'ESP', src: '198.51.100.1', dst: '192.168.1.105', lenRange: [800, 1380], spi: '0x582c0919', info: 'ESP Seq={seq}, SPI=0x582c0919, AES-256-GCM encrypted' },
+            { proto: 'IKEv2', src: '192.168.1.105', dst: '198.51.100.1', lenRange: [80, 120], spi: '—', info: 'IKE DPD Keepalive (R-U-THERE), Msg ID={seq}' },
+            { proto: 'ESP', src: '192.168.1.105', dst: '198.51.100.1', lenRange: [600, 1100], spi: '0x4a88f190', info: 'ESP Seq={seq}, Tunnel Mode, 16B ICV' },
+            { proto: 'ESP', src: '198.51.100.1', dst: '192.168.1.105', lenRange: [400, 900], spi: '0x582c0919', info: 'ESP Seq={seq}, Tunnel Mode, Auth-Tag verified' },
+        ];
+
+        function setDuration(seconds, btn) {
+            document.getElementById('liveDuration').value = seconds;
+            document.querySelectorAll('.duration-preset').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function refreshLiveInterfaces() {
+            document.getElementById('liveEngineStatus').textContent = 'Interfaces refreshed. Ready to capture.';
+        }
+
+        function startLiveCapture() {
+            if (isCapturing) return;
+            isCapturing = true;
+            livePacketNum = 0;
+            liveTotalBytes = 0;
+            liveEspCount = 0;
+            liveIkeCount = 0;
+
+            document.getElementById('livePacketTableBody').innerHTML = '';
+            document.getElementById('liveEngineStatus').textContent = 'Capturing packets...';
+            document.getElementById('liveEngineStatus').style.color = 'var(--accent-cyan)';
+
+            const duration = parseInt(document.getElementById('liveDuration').value) || 30;
+            const startTime = Date.now();
+
+            liveInterval = setInterval(() => {
+                if (!isCapturing || (Date.now() - startTime) > duration * 1000) {
+                    stopLiveCapture();
+                    return;
+                }
+
+                const tpl = livePacketTemplates[Math.floor(Math.random() * livePacketTemplates.length)];
+                livePacketNum++;
+                const len = Math.floor(Math.random() * (tpl.lenRange[1] - tpl.lenRange[0])) + tpl.lenRange[0];
+                liveTotalBytes += len;
+
+                if (tpl.proto === 'ESP') liveEspCount++;
+                else liveIkeCount++;
+
+                const elapsed = ((Date.now() - startTime) / 1000).toFixed(3);
+                const infoText = tpl.info.replace('{seq}', livePacketNum);
+
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${livePacketNum}</td><td>${elapsed}</td><td>${tpl.src}</td><td>${tpl.dst}</td><td><span style="color: ${tpl.proto === 'ESP' ? 'var(--accent-success)' : 'var(--accent-cyan)'}">${tpl.proto}</span></td><td>${len}</td><td style="font-family:'JetBrains Mono',monospace;font-size:11px;">${tpl.spi}</td><td style="font-size:11.5px;">${infoText}</td>`;
+                
+                const tbody = document.getElementById('livePacketTableBody');
+                tbody.appendChild(row);
+                row.scrollIntoView({ behavior: 'smooth', block: 'end' });
+
+                // Update metrics
+                document.getElementById('livePacketCount').textContent = livePacketNum;
+                document.getElementById('livePacketSub').textContent = livePacketNum + ' Packets';
+                document.getElementById('liveFeedLabel').textContent = 'Live Feed: ' + livePacketNum + ' Packets';
+
+                if (liveTotalBytes > 1048576) {
+                    document.getElementById('liveDataVol').textContent = (liveTotalBytes / 1048576).toFixed(2) + ' MB';
+                } else {
+                    document.getElementById('liveDataVol').textContent = (liveTotalBytes / 1024).toFixed(1) + ' KB';
+                }
+
+                document.getElementById('liveIpsecDist').innerHTML = '<span style="color:var(--accent-cyan);">ESP: ' + liveEspCount + '</span>&nbsp;&nbsp;<span style="color:var(--accent-blue);">IKE: ' + liveIkeCount + '</span>';
+
+            }, 150); // New packet every 150ms
+        }
+
+        function stopLiveCapture() {
+            isCapturing = false;
+            if (liveInterval) { clearInterval(liveInterval); liveInterval = null; }
+            document.getElementById('liveEngineStatus').textContent = 'Capture complete. ' + livePacketNum + ' packets captured.';
+            document.getElementById('liveEngineStatus').style.color = 'var(--accent-success)';
+        }
+
+        function analyzeCapturedStream() {
+            if (livePacketNum === 0) {
+                alert('No captured packets to analyze. Start a capture first.');
+                return;
+            }
+            // Trigger the main PCAP analysis simulation with captured data
+            if (!isAnalyzed) triggerPcapSimulation();
+            navigateTo('dashboard');
+        }
+
+        // ========== IPSEC DATA POPULATION (on analysis) ==========
+        function populateIpsecData() {
+            document.getElementById('ikeVersion').textContent = 'IKEv2 (RFC 7296)';
+            document.getElementById('ikeVersion').style.color = 'var(--accent-cyan)';
+            document.getElementById('ikePacketCount').textContent = '4 packets';
+            document.getElementById('ikeExchangeType').textContent = 'IKE_SA_INIT + IKE_AUTH';
+            document.getElementById('ikeAuth').textContent = 'RSA Digital Signature';
+            document.getElementById('ikeEncAlgo').textContent = 'AES-256-GCM (AEAD, 16B ICV)';
+            document.getElementById('ikeDhGroup').textContent = 'Group 14 (2048-bit MODP)';
+
+            document.getElementById('ikeSaProposalRows').innerHTML = `
+                <tr><td>1</td><td>IKEv2</td><td style="color:var(--accent-success);">AES-256-GCM</td><td>HMAC-SHA256</td><td>Group 14 (2048-bit)</td><td>RSA Signature</td><td>256</td></tr>
+                <tr><td>2</td><td>ESP</td><td style="color:var(--accent-success);">AES-256-GCM</td><td>—  (AEAD)</td><td>Group 14 (PFS)</td><td>—</td><td>256</td></tr>
+            `;
+
+            document.getElementById('ikeHandshakeRows').innerHTML = `
+                <tr><td>1</td><td>0.000000</td><td>v2.0</td><td>IKE_SA_INIT</td><td>0</td><td>SA, KE, Ni</td><td>14</td><td style="color:var(--accent-cyan);">Initiator</td></tr>
+                <tr><td>2</td><td>0.042180</td><td>v2.0</td><td>IKE_SA_INIT</td><td>0</td><td>SA, KE, Nr</td><td>14</td><td style="color:var(--accent-success);">Responder</td></tr>
+                <tr><td>3</td><td>0.089201</td><td>v2.0</td><td>IKE_AUTH</td><td>1</td><td>SK{IDi, AUTH, SA, TSi, TSr}</td><td>—</td><td style="color:var(--accent-cyan);">Initiator</td></tr>
+                <tr><td>4</td><td>0.125430</td><td>v2.0</td><td>IKE_AUTH</td><td>1</td><td>SK{IDr, AUTH, SA, TSi, TSr}</td><td>—</td><td style="color:var(--accent-success);">Responder</td></tr>
+            `;
+        }
+
+        // ========== AI ANALYSIS SIMULATION ==========
+        function runAiAnalysis() {
+            document.getElementById('aiEnvStatus').textContent = 'Running AI inference pipeline...';
+            document.getElementById('aiEnvStatus').style.color = 'var(--accent-cyan)';
+            document.getElementById('btnRunAi').disabled = true;
+            document.getElementById('btnRunAi').textContent = 'Analyzing...';
+
+            setTimeout(() => {
+                document.getElementById('aiEnvStatus').textContent = 'AI analysis complete. Python 3.x environment detected.';
+                document.getElementById('aiEnvStatus').style.color = 'var(--accent-success)';
+                document.getElementById('btnRunAi').disabled = false;
+                document.getElementById('btnRunAi').textContent = 'Run AI Analysis';
+
+                document.getElementById('aiTrafficType').textContent = 'VPN Tunnel / Web Browsing';
+                document.getElementById('aiTrafficType').style.color = 'var(--accent-success)';
+                document.getElementById('aiConfidence').textContent = '98.42%';
+                document.getElementById('aiConfidence').style.color = 'var(--accent-cyan)';
+                document.getElementById('aiAnomalyStatus').textContent = 'Normal (No Anomaly)';
+                document.getElementById('aiAnomalyStatus').style.color = 'var(--accent-success)';
+                document.getElementById('aiAnomalyDetail').textContent = 'Isolation Forest Score: 0.12 (Threshold: 0.50)';
+                document.getElementById('aiProtocol').textContent = 'IPsec ESP (Genuine Tunnel)';
+                document.getElementById('aiProtocol').style.color = 'var(--accent-success)';
+
+                populateFeatureBars();
+            }, 1200);
+        }
+
+        function populateFeatureBars() {
+            const features = [
+                { pct: 34.2, color: 'var(--accent-cyan)' },
+                { pct: 22.8, color: 'var(--accent-blue)' },
+                { pct: 18.1, color: 'var(--accent-purple)' },
+                { pct: 14.6, color: 'var(--accent-success)' },
+                { pct: 10.3, color: 'var(--accent-warning)' },
+            ];
+
+            const bars = document.querySelectorAll('#featureImportanceList .feature-bar-item');
+            bars.forEach((item, idx) => {
+                const fill = item.querySelector('.feature-bar-fill');
+                const pctLabel = item.querySelector('.feature-bar-pct');
+                fill.style.width = features[idx].pct + '%';
+                fill.style.background = features[idx].color;
+                pctLabel.textContent = features[idx].pct + '%';
+            });
+        }
+
+        function resetFeatureBars() {
+            const bars = document.querySelectorAll('#featureImportanceList .feature-bar-item');
+            bars.forEach(item => {
+                item.querySelector('.feature-bar-fill').style.width = '0%';
+                item.querySelector('.feature-bar-pct').textContent = '—';
+            });
+        }
+
+        // Hook into main analysis simulation to also populate IPsec + AI
+        const _origTrigger = triggerPcapSimulation;
+        triggerPcapSimulation = function() {
+            _origTrigger();
+            // After the analysis completes, also populate IPsec data
+            if (!isAnalyzed) {
+                setTimeout(() => {
+                    populateIpsecData();
+                }, 700);
+            }
+        };
     </script>
 </body>
 </html>
